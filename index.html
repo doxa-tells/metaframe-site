@@ -495,7 +495,7 @@
         [
           /* высота растёт линейно без упора в потолок контейнера, потом рывок */
           {width:'8vw',   height:'2.9vw',  easing:'linear', offset:0},
-          {width:'94vw',  height:'24vw',   easing:EXPO, offset:.293},
+          {width:'94vw',  height:'calc(24vw - 10px)',   easing:EXPO, offset:.293},
           {width:'100vw', height:'100vh',  offset:1}
         ],
         {duration:1160, easing:'linear', fill:'forwards'}
