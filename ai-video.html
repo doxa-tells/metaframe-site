@@ -90,12 +90,21 @@
   /* ---------- работы ---------- */
   .works{padding:0 4vw 14vh}
   .row{
+    position:relative;
     display:grid;
     grid-template-columns: minmax(280px, 38%) 1fr;
     gap: 0 4.5vw;
     align-items:start;
-    border-top:1px solid var(--line);
     padding:6.5vh 1vw 7vh;
+  }
+  /* линия над рядом: вытягивается слева направо по скроллу */
+  .row::before{
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:1px;
+    background:var(--line);
+    transform:scaleX(var(--lp, 0));
+    transform-origin:left center;
+    will-change:transform;
   }
   .thumb{
     aspect-ratio:16/9;
@@ -294,7 +303,8 @@
     row,
     thumb: row.querySelector('.thumb'),
     h2:    row.querySelector('h2'),
-    tag:   row.querySelector('.tag')
+    tag:   row.querySelector('.tag'),
+    lp:0, tp:0            /* линия: текущее и целевое значение */
   }));
   const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
   const easeOut = t=>1-Math.pow(1-t,3);
@@ -314,17 +324,35 @@
       const c = r.top + r.height/2;
       const gap = prevC === null ? Infinity : c - prevC;
       prevC = c;
-      if (r.bottom < -80 || r.top > vh+80) continue;
+      if (r.top > vh+80){ it.tp = 0; continue; }
+      if (r.bottom < -80){ it.tp = 1; continue; }
       const entry = vh + r.height/2;
       const start = Math.min(entry, mid + gap);
       const p = easeOut(clamp((start - c) / (start - mid), 0, 1));
+      /* линия чуть опережает рост ряда */
+      it.tp = easeOut(clamp((start - c) / (start - mid) * 1.15, 0, 1));
       it.thumb.style.transform = `scale(${(.5 + .5*p).toFixed(4)})`;
       it.thumb.style.opacity   = (.15 + .85*p).toFixed(3);
       it.h2.style.transform    = `translateX(${(-70*(1-p)).toFixed(1)}px) scale(${(.5 + .5*p).toFixed(4)})`;
       it.h2.style.opacity      = (.12 + .88*p).toFixed(3);
       it.tag.style.opacity     = clamp((p-.45)/.55, 0, 1).toFixed(3);
     }
+    kickLine();
   }
+  /* плавная дотяжка линий (lerp) — линия тянется смуз, а не прыгает за скроллом */
+  let lineRaf = null;
+  function lineTick(){
+    let live = false;
+    for (const it of rows){
+      const d = it.tp - it.lp;
+      if (Math.abs(d) > .001){ it.lp += d*.13; live = true; }
+      else if (it.lp !== it.tp){ it.lp = it.tp; }
+      else continue;
+      it.row.style.setProperty('--lp', it.lp.toFixed(4));
+    }
+    lineRaf = live ? requestAnimationFrame(lineTick) : null;
+  }
+  function kickLine(){ if(lineRaf === null) lineRaf = requestAnimationFrame(lineTick); }
   function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
   addEventListener('scroll', onScroll, {passive:true});
   addEventListener('resize', onScroll);
