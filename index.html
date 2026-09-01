@@ -54,11 +54,10 @@
     z-index:1;
   }
 
-  /* ---------- UI поверх: работает трюк difference ---------- */
+  /* ---------- UI поверх: без blend-режимов, чистый цвет ---------- */
   .ui{
     position:absolute;
     color: var(--brand);
-    mix-blend-mode: difference;   /* на фоне цвета бренда -> чёрный, поверх видео -> циан */
     z-index:2;
   }
 
@@ -107,8 +106,7 @@
   nav .ui{opacity:0; transition:opacity .8s ease .1s; mix-blend-mode:normal}
   nav.show .ui{opacity:1}
 
-  /* после раскрытия текст и лого — статично голубые, без "негатива" */
-  #word.solid, #logo.solid{ mix-blend-mode:normal; }
+  /* после раскрытия текст и лого — белые (перелив задаётся в JS) */
 
   .hidden{opacity:0 !important; transition:opacity .35s ease}
 
@@ -514,13 +512,11 @@
         );
       }, 1050);
 
-      /* уходим с difference: цвет морфится из чёрного в голубой синхронно
-         с наездом видео, дальше элементы статично голубые */
-      /* надпись и лого остаются в режиме difference ("негатив"), но цвет
-         уходит в белый — поверх тёмного видео преимущественно белые */
+      /* перелив из голубого в белый синхронно с раскрытием видео,
+         без blend-режимов: текст — через color, лого — через desaturate */
       word.animate([{color:'#00FCFF'},{color:'#ffffff'}], {duration:870, delay:350, easing:EXPO, fill:'both'});
       logo.animate(
-        [{filter:'brightness(1) invert(0)'},{filter:'brightness(0) invert(1)'}],
+        [{filter:'saturate(1) brightness(1)'},{filter:'saturate(0) brightness(2.2)'}],
         {duration:870, delay:350, easing:EXPO, fill:'both'}
       );
 
