@@ -7,37 +7,339 @@
 <style>
   @font-face{font-family:'Press Start 2P';src:url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
   @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
-  :root{--brand:#00FCFF}
+  :root{--brand:#00FCFF; --line:#242424}
   *{margin:0;padding:0;box-sizing:border-box}
   body{
-    background:#000; color:#fff; min-height:100vh;
+    background:#000; color:#fff;
     font-family:'Source Code Pro', monospace;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:30px; text-align:center; padding:6vw;
+    -webkit-font-smoothing:antialiased;
   }
-  h1{
+
+  /* ---------- шапка ---------- */
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 34px;
+    mix-blend-mode:screen;
+  }
+  header img{height:44px; display:block}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:16vh 7vw 10vh;
+    position:relative;
+  }
+  .hero .label{
+    color:var(--brand); font-size:13px; letter-spacing:.24em;
+    margin-bottom:30px;
+  }
+  .hero h1{
     font-family:'Press Start 2P','Source Code Pro',monospace;
     word-spacing:-.45em;
-    font-weight:700; text-transform:uppercase; color:var(--brand);
-    font-size:clamp(42px,9vw,120px); letter-spacing:-.02em; line-height:1;
+    font-weight:700; text-transform:uppercase;
+    font-size:clamp(19px, 2.2vw, 36px);
+    line-height:1.7; letter-spacing:-.01em;
+    max-width:30ch;
   }
-  p{
-    font-family:'Source Code Pro',monospace;
-    letter-spacing:.28em; font-size:14px; color:#888;
+  .hero h1 .accent{color:var(--brand)}
+  .hero .sub{
+    margin-top:32px;
+    font-size:clamp(15px,1.3vw,19px); line-height:1.6;
+    color:#cfcfcf; max-width:52ch;
   }
-  a{
-    font-family:'Source Code Pro',monospace;
+  .stats{
+    display:flex; gap:5vw; flex-wrap:wrap; justify-content:center;
+    margin-top:7vh;
+  }
+  .stats div{text-align:center}
+  .stats b{
+    display:block;
+    font-family:'Press Start 2P','Source Code Pro',monospace;
+    font-size:clamp(22px,2.4vw,40px); color:var(--brand);
+    margin-bottom:14px;
+  }
+  .stats span{font-size:12px; letter-spacing:.26em; color:#8a8a8a; text-transform:uppercase}
+  .hnav{display:flex; gap:14px; justify-content:center; margin-top:7vh}
+  .hnav a{
     color:var(--brand); text-decoration:none;
-    letter-spacing:.18em; font-size:14px;
-    border-bottom:1px solid transparent; padding-bottom:2px;
-    transition:border-color .2s;
+    font-size:13px; letter-spacing:.18em;
+    border:1px solid var(--brand);
+    padding:10px 18px;
+    transition:background .2s, color .2s;
   }
-  a:hover{border-color:var(--brand)}
+  .hnav a:hover{background:var(--brand); color:#000}
+  .hero .scroll{
+    position:absolute; left:50%; bottom:4.5vh;
+    transform:translateX(-50%);
+    font-size:12px; letter-spacing:.34em; color:#888;
+    animation: bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+  /* ---------- слайды: 2 модуля на слайд ---------- */
+  .slide{
+    min-height:100vh;
+    padding:9vh 4vw;
+    display:flex; flex-direction:column; justify-content:center;
+    gap:9vh;
+    border-top:1px solid var(--line);
+  }
+  .module{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 4.5vw;
+    align-items:center;
+    min-height:38vh;
+  }
+  .module.rev .ph{order:2}
+  .module.rev .mtext{order:1}
+
+  /* пустышка под фото — половина слайда */
+  .ph{
+    align-self:stretch;
+    min-height:38vh;
+    background:#0b0b0b;
+    border:1px dashed #2c2c2c;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; letter-spacing:.34em; color:#3a3a3a;
+    text-transform:uppercase;
+  }
+
+  .mnum{
+    color:var(--brand); font-size:12px; letter-spacing:.28em;
+    text-transform:uppercase;
+    margin-bottom:26px;
+  }
+  .mtext h3{
+    font-family:'Press Start 2P','Source Code Pro',monospace;
+    word-spacing:-.45em;
+    font-weight:700; text-transform:uppercase;
+    font-size:clamp(14px, 1.35vw, 22px);
+    line-height:1.75; letter-spacing:-.01em;
+    margin-bottom:28px;
+  }
+  .mtext ul{list-style:none}
+  .mtext li{
+    font-size:clamp(13px, 1.05vw, 16px);
+    line-height:1.65; color:#c9c9c9;
+    padding-left:22px; position:relative;
+    margin-bottom:12px;
+  }
+  .mtext li::before{content:'—'; position:absolute; left:0; color:var(--brand)}
+
+  /* ---------- финал: 80/20 + отбор ---------- */
+  .finale{
+    min-height:100vh;
+    border-top:1px solid var(--line);
+    padding:14vh 7vw;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+  }
+  .finale .big{
+    font-family:'Press Start 2P','Source Code Pro',monospace;
+    word-spacing:-.45em;
+    font-size:clamp(34px,5vw,80px); color:var(--brand);
+    margin-bottom:5vh;
+  }
+  .finale .note{
+    font-size:clamp(14px,1.2vw,18px); line-height:1.7; color:#cfcfcf;
+    max-width:62ch; margin-bottom:12vh;
+  }
+  .finale .note b{color:#fff}
+  .finale .label{color:var(--brand); font-size:13px; letter-spacing:.24em; margin-bottom:26px}
+  .finale h2{
+    font-family:'Press Start 2P','Source Code Pro',monospace;
+    word-spacing:-.45em;
+    font-weight:700; text-transform:uppercase;
+    font-size:clamp(20px,2.4vw,40px);
+    margin-bottom:28px;
+  }
+  .finale .bonus{
+    font-size:clamp(14px,1.2vw,18px); line-height:1.7; color:#cfcfcf;
+    max-width:56ch; margin-bottom:6vh;
+  }
+
+  /* появление при скролле */
+  .fade{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease}
+  .fade.in{opacity:1; transform:none}
+
+  @media (max-width:760px){
+    .module{grid-template-columns:1fr; gap:22px; min-height:auto}
+    .module.rev .ph{order:0}
+    .module.rev .mtext{order:0}
+    .ph{min-height:44vw}
+    .slide{gap:11vh}
+    header img{height:36px}
+  }
 </style>
 </head>
 <body>
-  <h1>AI Academy</h1>
-  <p>РАЗДЕЛ В РАЗРАБОТКЕ</p>
-  <a href="index.html">&larr; НА ГЛАВНУЮ</a>
+
+<header>
+  <a href="index.html"><img src="assets/logo.png" alt="METAFRAME"></a>
+</header>
+
+<section class="hero">
+  <p class="label">АКАДЕМИЯ · METAFRAME ACADEMY</p>
+  <h1>От нуля до <span class="accent">AI-креатора</span> за 6&nbsp;недель</h1>
+  <p class="sub">6 модулей, 80% практики, готовое портфолио и шанс попасть в команду MetaFrame.</p>
+  <div class="stats">
+    <div><b>6</b><span>недель</span></div>
+    <div><b>6</b><span>модулей</span></div>
+    <div><b>80/20</b><span>практика / теория</span></div>
+    <div><b>1</b><span>первый клиент</span></div>
+  </div>
+  <nav class="hnav">
+    <a href="#modules">Подать заявку ↓</a>
+    <a href="index.html#directions">Контакты</a>
+  </nav>
+  <span class="scroll">SCROLL ↓</span>
+</section>
+
+<section class="slide" id="modules">
+
+  <div class="module fade">
+    <div class="ph">Фото — M01</div>
+    <div class="mtext">
+      <p class="mnum">M01 · Фундамент</p>
+      <h3>Из хаоса генераций — в систему, которая даёт результат с первого промпта</h3>
+      <ul>
+        <li>Перестаёшь угадывать промпты — начинаешь управлять результатом</li>
+        <li>Разбираешься, как ИИ создаёт генерации и где у него тонкости</li>
+        <li>Понимаешь, какой инструмент под какую задачу — без метаний между 15 сервисами</li>
+        <li>Читаешь чужие работы как рентген — видишь не картинку, а пайплайн за ней</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="module rev fade">
+    <div class="ph">Фото — M02</div>
+    <div class="mtext">
+      <p class="mnum">M02 · Фото · Промпт-инжиниринг</p>
+      <h3>Фотосессия, которой не было. Студия, которая не существует. Результат, который не отличить.</h3>
+      <ul>
+        <li>Меняешь погоду, объект, локацию — без потери стиля</li>
+        <li>Генерируешь fashion-фотосессии без студии, модели и фотографа</li>
+        <li>Собираешь продуктовые карточки для e-commerce неотличимо от профи-съёмки</li>
+        <li>Держишь единого персонажа на 50+ кадров — одно лицо, один стиль</li>
+        <li>Управляешь камерой через текст — фокус, ГРИП, схема света, всё промптом</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<section class="slide">
+
+  <div class="module fade">
+    <div class="ph">Фото — M03</div>
+    <div class="mtext">
+      <p class="mnum">M03 · Видео · Сценаристика</p>
+      <h3>Анимируешь одним промптом то, что раньше требовало After Effects и неделю работы</h3>
+      <ul>
+        <li>Пишешь сценарии под логику нейросетей — то, что модель реально отрендерит</li>
+        <li>Анимируешь сложные сцены: несколько объектов, взаимодействие, контакт</li>
+        <li>Управляешь камерой как оператор — через текстовые команды</li>
+        <li>Держишь персонажа и локацию от первого кадра до последнего — без «дрифта»</li>
+        <li>Раскладываешь действие по секундам, а не надеешься на случайный результат</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="module rev fade">
+    <div class="ph">Фото — M04</div>
+    <div class="mtext">
+      <p class="mnum">M04 · Саунд-дизайн · SFX</p>
+      <h3>Без звука — демка. Со звуком — продакшн. Разница — этот модуль.</h3>
+      <ul>
+        <li>Генерируешь музыку под настроение сцены — описываешь текстом, получаешь готовое</li>
+        <li>Синхронизируешь звук с движением губ в кадре (lip-sync)</li>
+        <li>Клонируешь голос — управляешь интонацией, паузами, эмоцией без диктора</li>
+        <li>Убираешь «пластиковое» AI-звучание — комната, реверб, фон — голос садится в сцену</li>
+        <li>Делаешь полноценные треки и ремиксы популярных песен</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<section class="slide">
+
+  <div class="module fade">
+    <div class="ph">Фото — M05</div>
+    <div class="mtext">
+      <p class="mnum">M05 · Монтаж · Колор</p>
+      <h3>Сгенерировать отрывки может каждый — смонтировать в цельную картину единицы</h3>
+      <ul>
+        <li>Сводишь клипы из разных моделей в один визуальный стиль — без скачков цвета и контраста</li>
+        <li>Выравниваешь тайминг и ритм — монтаж перестаёт быть обрывистым</li>
+        <li>Колор-грейдингом вытягиваешь «пластиковую» AI-картинку до кинематографа</li>
+        <li>Убираешь артефакты генерации на постпродакшне — зритель не замечает, что это AI</li>
+        <li>Апскейлишь до 4K без потери деталей — Topaz, кодеки, настройки экспорта</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="module rev fade">
+    <div class="ph">Фото — M06</div>
+    <div class="mtext">
+      <p class="mnum">M06 · Портфолио · Выход в рынок</p>
+      <h3>Закрываешь первого клиента за 2 недели — с готовым оффером, портфолио и скриптом</h3>
+      <ul>
+        <li>Собираешь 5 роликов под разные ниши — e-commerce, рестораны, недвижимость, fashion, личный бренд</li>
+        <li>Выстраиваешь воронку от первого касания до оплаты — холодное, созвон, оффер, закрытие</li>
+        <li>Пишешь скрипты для переписки и созвонов — знаешь, что отвечать на «а что я получу» и «почему так дорого»</li>
+        <li>Упаковываешь страницу так, чтобы она продавала за тебя</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<section class="finale">
+  <p class="big">80/20</p>
+  <p class="note">Все модули идут <b>в перемешку, начиная с первого урока</b> — курс направлен на то, чтобы вы скорее начали практиковаться, привыкали к ИИ и нарабатывали свой стиль. <b>80% практики, 20% теории.</b></p>
+
+  <p class="label">ГЛАВНЫЙ БОНУС</p>
+  <h2>Отбор в MetaFrame</h2>
+  <p class="bonus">Мы ищем таланты. Автор лучшего финального ролика получает оффер на оплачиваемую стажировку или проектную работу в нашей студии — над реальными заказами для брендов.</p>
+  <nav class="hnav">
+    <a href="index.html#directions">Подать заявку →</a>
+  </nav>
+</section>
+
+<script>
+  /* появление модулей при скролле */
+  const io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:.18});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
+
+<script>
+  /* лёгкое инерционное скольжение при скролле колесом */
+  (()=>{
+    if (matchMedia('(pointer:coarse)').matches) return;
+    let target = scrollY, cur = scrollY, raf = null;
+    const maxY = ()=> document.documentElement.scrollHeight - innerHeight;
+    function tick(){
+      cur += (target - cur) * .14;
+      if (Math.abs(target - cur) < .5){ cur = target; raf = null; }
+      else raf = requestAnimationFrame(tick);
+      scrollTo({top:cur, left:0, behavior:'instant'});
+    }
+    addEventListener('wheel', e=>{
+      if (e.ctrlKey) return;
+      e.preventDefault();
+      const d = e.deltaMode === 1 ? e.deltaY*16 : e.deltaY;
+      target = Math.max(0, Math.min(maxY(), target + d));
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, {passive:false});
+    addEventListener('scroll', ()=>{ if (raf === null) target = cur = scrollY; }, {passive:true});
+  })();
+</script>
 </body>
 </html>
