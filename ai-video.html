@@ -49,6 +49,13 @@
     width:100%; height:100%;
     object-fit:cover;
     z-index:0;
+    /* зум + угол 45° + очень медленный дрейф в сторону */
+    will-change:transform;
+    animation: bgdrift 36s linear infinite alternate;
+  }
+  @keyframes bgdrift{
+    from{transform:rotate(45deg) scale(2.3) translateX(-3%)}
+    to  {transform:rotate(45deg) scale(2.3) translateX(3%)}
   }
   .hero::after{                 /* затемнение поверх видео */
     content:'';
