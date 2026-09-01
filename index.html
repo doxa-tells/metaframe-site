@@ -67,6 +67,7 @@
     height: clamp(160px, 26vh, 320px);
     pointer-events:none;
     user-select:none;
+    opacity:0;               /* лого скрыто, фэйд-ин после раскрытия */
   }
 
   #word{
@@ -520,8 +521,9 @@
         [{filter:'saturate(1) brightness(1)'},{filter:'saturate(0) brightness(2.2)'}],
         {duration:870, delay:350, easing:EXPO, fill:'both'}
       );
-      /* METAFRAME проявляется фэйдом уже после раскрытия на весь экран */
+      /* METAFRAME и лого проявляются фэйдом уже после раскрытия на весь экран */
       word.animate([{opacity:0},{opacity:1}], {duration:900, delay:1250, easing:'ease-out', fill:'both'});
+      logo.animate([{opacity:0},{opacity:1}], {duration:900, delay:1250, easing:'ease-out', fill:'both'});
 
       /* лого и надпись не двигаются — остаются по центру */
 
