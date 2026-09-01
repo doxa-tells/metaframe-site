@@ -362,9 +362,10 @@
     #about{
       min-height:200vh; min-height:200svh;      /* слайд текста + слайд фаундера */
       padding-bottom:0;
-      display:grid;
-      grid-template-rows:auto 1fr auto;
+      display:flex; flex-direction:column;
     }
+    #about h2{margin-top:auto; font-size:26px}  /* заголовок не тянется, зона по центру */
+    #about .lead{margin-bottom:auto}
     #about .bg-bottom{display:none}
     /* блок фаундера сам несёт фото — текст всегда ПОВЕРХ него */
     .founder{
@@ -387,14 +388,18 @@
     }
     .contacts{
       min-height:100vh; min-height:100svh;
-      margin-top:auto; max-width:none;
+      margin-top:auto; max-width:520px;
       display:flex; flex-direction:column; justify-content:center;
       padding-top:0;
     }
+    .contacts button{align-self:flex-start; width:auto}
     /* кадр партнёров: держим ДиКаприо в центре */
     #partners{background-position:0 0, 58% 28%}
     #directions h2{text-align:left; white-space:normal}
-    .dirs{grid-template-columns:1fr}
+    /* кнопки направлений не тянутся во всю ширину */
+    .dirs{grid-template-columns:minmax(200px, 260px); justify-content:start}
+    /* заголовок about чуть ниже */
+    #about h2{margin-top:6vh}
   }
 </style>
 </head>
