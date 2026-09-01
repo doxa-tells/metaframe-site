@@ -114,20 +114,26 @@ fbq('track', 'PageView');
   .list li::before{content:'—'; position:absolute; left:0; color:var(--brand)}
   .list b{color:#fff}
 
-  /* спикер */
+  /* спикер: текст поверх фото, низ затемнён */
   .speaker{
-    display:grid; grid-template-columns:minmax(260px,42%) 1fr;
-    gap:6vw; align-items:center;
-  }
-  .speaker .photo{
-    aspect-ratio:4/5;
+    position:relative;
+    min-height:92svh;
     background:url('assets/founder-bg.jpg') 38% 20% / cover no-repeat;
-    border:1px solid #1f1f1f;
+    display:flex; align-items:flex-end;
+  }
+  .speaker::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.4) 45%, rgba(0,0,0,.94) 88%);
+  }
+  .sp-inner{
+    position:relative; z-index:1;
+    width:100%; max-width:980px; margin:0 auto;
+    padding:0 6vw 7vh;
   }
   .speaker h2{margin-bottom:3vh}
-  .speaker .role{color:var(--brand); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:24px; line-height:1.9}
+  .speaker .role{color:var(--brand); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:20px; line-height:1.9}
   .speaker .role span{display:block; white-space:nowrap}   /* ровно 2 ряда, без переносов */
-  .speaker p{font-size:clamp(15px,1.15vw,18px); line-height:1.7; color:#d6d6d6; margin-bottom:16px}
+  .speaker p{font-size:clamp(14px,1.1vw,17px); line-height:1.7; color:#d6d6d6; margin-bottom:14px}
   .speaker p b{color:#fff}
   .quote{
     margin-top:26px; padding:22px 26px;
@@ -241,14 +247,13 @@ fbq('track', 'PageView');
 </section>
 
 <!-- ===================== СПИКЕР ===================== -->
-<section>
-  <div class="wrap speaker fade">
-    <div class="photo"></div>
-    <div>
-      <p class="label" style="margin-bottom:24px">Ведущий</p>
-      <h2 class="px">Дархан Телманов</h2>
+<section style="padding:0">
+  <div class="speaker fade">
+    <div class="sp-inner">
+      <p class="label" style="margin-bottom:22px">Ведущий</p>
+      <h2 class="px" style="margin-bottom:2.5vh">Дархан Телманов</h2>
       <p class="role"><span>ex. Generative Director — Higgsfield</span><span>Top-1 AI Creator в Астане · Основатель METAFRAME</span></p>
-      <p>Работал генеративным специалистом внутри <b>Higgsfield</b> — одной из главных AI-видео платформ мира. Победитель Higgsfield World Championship 2025 среди 5000+ участников.</p>
+      <p>Победитель <b>Higgsfield World Championship 2025</b> среди 5000+ участников.</p>
       <div class="quote">«Я знаю эти нейросети изнутри: лучшие лайфхаки, фишки и обходы ограничений, которые никогда не попадут в публичные туториалы. На МК отдаю их за один вечер.»</div>
     </div>
   </div>
