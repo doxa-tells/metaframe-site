@@ -126,6 +126,32 @@
     aspect-ratio:9/16;
     width:min(320px, 100%);
   }
+
+  /* ---------- ряд из 3 вертикальных карточек: надпись над обложкой ---------- */
+  .row.verticals{
+    grid-template-columns:repeat(3, 1fr);
+    grid-template-rows:auto auto auto;
+    gap:0 3vw;
+  }
+  .vcard{
+    cursor:pointer;
+    display:grid;
+    grid-template-rows:subgrid;
+    grid-row:span 3;
+  }
+  .vcard h2{
+    align-self:end;
+    font-size:clamp(13px, 1.45vw, 23px);
+    line-height:1.4;
+    margin-bottom:24px;
+  }
+  .vcard .thumb.tall{width:100%}
+  .vcard .tag{margin-top:20px}
+  /* ховер по карточке, а не по всему ряду */
+  .row.verticals:hover h2 .roll{transform:none}
+  .row.verticals .vcard:hover h2 .roll{transform:translateY(-100%)}
+  .row.verticals:hover .tag::after{opacity:0}
+  .row.verticals .vcard:hover .tag::after{opacity:1}
   .row h2{
     font-family:'Press Start 2P','Source Code Pro',monospace;
     word-spacing:-.45em;
@@ -191,6 +217,8 @@
     .row{grid-template-columns:1fr; gap:22px}
     .row .tag{grid-column:1; margin-top:6px}
     .thumb.tall{width:min(280px, 74vw)}
+    .row.verticals{grid-template-columns:1fr; gap:9vh 0}
+    .vcard h2{font-size:clamp(18px,5vw,24px)}
     header img{height:36px}
   }
 </style>
@@ -268,10 +296,22 @@
     <p class="tag">HOTELS &amp; RESORTS · AI COMMERCIAL</p>
   </div>
 
-  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/delpapa.mp4">
-    <div class="thumb tall"><img src="assets/works/delpapa.jpg" alt="Del Papa"></div>
-    <h2><span class="roll"><span>Del Papa</span><span aria-hidden="true">Del Papa</span></span></h2>
-    <p class="tag">ИТАЛЬЯНСКИЙ РЕСТОРАН · AI COMMERCIAL</p>
+  <div class="row verticals">
+    <div class="vcard" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/delpapa.mp4">
+      <h2><span class="roll"><span>Del Papa</span><span aria-hidden="true">Del Papa</span></span></h2>
+      <div class="thumb tall"><img src="assets/works/delpapa.jpg" alt="Del Papa"></div>
+      <p class="tag">ИТАЛЬЯНСКИЙ РЕСТОРАН · AI COMMERCIAL</p>
+    </div>
+    <div class="vcard" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/jewelry.mp4">
+      <h2><span class="roll"><span>Switzerland Jewelry</span><span aria-hidden="true">Switzerland Jewelry</span></span></h2>
+      <div class="thumb tall"><img src="assets/works/jewelry.jpg" alt="Switzerland Jewelry"></div>
+      <p class="tag">ЮВЕЛИРНЫЕ УКРАШЕНИЯ · AI COMMERCIAL</p>
+    </div>
+    <div class="vcard" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/travel.mp4">
+      <h2><span class="roll"><span>Travel Agency</span><span aria-hidden="true">Travel Agency</span></span></h2>
+      <div class="thumb tall"><img src="assets/works/travel.jpg" alt="Travel Agency"></div>
+      <p class="tag">ТУРАГЕНТСТВО · AI COMMERCIAL</p>
+    </div>
   </div>
 
 </section>
@@ -289,7 +329,7 @@
     player.classList.remove('open');
     plVideo.pause(); plVideo.removeAttribute('src'); plVideo.load();
   }
-  document.querySelectorAll('.row[data-video]').forEach(r=>{
+  document.querySelectorAll('.row[data-video], .vcard[data-video]').forEach(r=>{
     r.addEventListener('click', ()=>{
       plVideo.src = r.dataset.video;
       player.classList.add('open');
@@ -307,9 +347,9 @@
      доезжает и дорастает до полного размера. */
   const rows = [...document.querySelectorAll('.row')].map(row=>({
     row,
-    thumb: row.querySelector('.thumb'),
-    h2:    row.querySelector('h2'),
-    tag:   row.querySelector('.tag'),
+    thumbs: [...row.querySelectorAll('.thumb')],
+    h2s:    [...row.querySelectorAll('h2')],
+    tags:   [...row.querySelectorAll('.tag')],
     lp:0, tp:0            /* линия: текущее и целевое значение */
   }));
   const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
@@ -337,11 +377,14 @@
       const p = easeOut(clamp((start - c) / (start - mid), 0, 1));
       /* линия чуть опережает рост ряда */
       it.tp = easeOut(clamp((start - c) / (start - mid) * 1.15, 0, 1));
-      it.thumb.style.transform = `scale(${(.5 + .5*p).toFixed(4)})`;
-      it.thumb.style.opacity   = (.15 + .85*p).toFixed(3);
-      it.h2.style.transform    = `translateX(${(-70*(1-p)).toFixed(1)}px) scale(${(.5 + .5*p).toFixed(4)})`;
-      it.h2.style.opacity      = (.12 + .88*p).toFixed(3);
-      it.tag.style.opacity     = clamp((p-.45)/.55, 0, 1).toFixed(3);
+      const ts = `scale(${(.5 + .5*p).toFixed(4)})`;
+      const to = (.15 + .85*p).toFixed(3);
+      const hs = `translateX(${(-70*(1-p)).toFixed(1)}px) scale(${(.5 + .5*p).toFixed(4)})`;
+      const ho = (.12 + .88*p).toFixed(3);
+      const tg = clamp((p-.45)/.55, 0, 1).toFixed(3);
+      for (const el of it.thumbs){ el.style.transform = ts; el.style.opacity = to; }
+      for (const el of it.h2s){ el.style.transform = hs; el.style.opacity = ho; }
+      for (const el of it.tags){ el.style.opacity = tg; }
     }
     kickLine();
   }
