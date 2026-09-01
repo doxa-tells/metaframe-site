@@ -530,8 +530,10 @@
 
     let expanded = false;
     const doExpand = ()=>{ if(!expanded){ expanded = true; expand(); } };
-    /* старт за ~20 кадров (24 fps ≈ 0.83с) до конца матрёшки */
-    const LEAD = 20 / 24;
+    /* старт почти в самом конце матрёшки (~4 кадра, 24 fps ≈ 0.17с):
+       крайний уровень успевает полностью заполнить контейнер,
+       и только затем hero появляется поверх и уходит в ширину */
+    const LEAD = 4 / 24;
     (function watch(){
       if (expanded) return;
       if (vM.duration && vM.currentTime >= vM.duration - LEAD) { doExpand(); return; }
