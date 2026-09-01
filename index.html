@@ -465,8 +465,8 @@
 
     /* фаза A: полоска плавно проявляется и сразу растёт, без отскока */
     reveal.animate(
-      [{width:'170px', height:'62px', opacity:0},
-       {width:'260px', height:'94px', opacity:1}],
+      [{width:'170px', height:'54px', opacity:0},
+       {width:'260px', height:'82px', opacity:1}],
       {duration:520, easing:'cubic-bezier(.25,.1,.25,1)', fill:'forwards'}
     );
 
@@ -474,7 +474,7 @@
     const growDur = Math.max(1200, ((vM.duration || 2.96) / 1.2 - .6) * 1000);
     setTimeout(()=>{
       reveal.animate(
-        [{width:'260px', height:'94px'}, {width:'46vw', height:'16.5vw'}],
+        [{width:'260px', height:'82px'}, {width:'46vw', height:'14.5vw'}],
         {duration:growDur, easing:'cubic-bezier(.4,0,.6,1)', fill:'forwards'}
       );
     }, 570);
