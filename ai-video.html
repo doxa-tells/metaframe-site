@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI - Video — METAFRAME</title>
+<style>
+  @font-face{font-family:'Press Start 2P';src:url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+  @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
+  :root{--brand:#00FCFF; --line:#242424}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:#000; color:#fff;
+    font-family:'Source Code Pro', monospace;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- шапка ---------- */
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 34px;
+    mix-blend-mode:screen;
+  }
+  header img{height:44px; display:block}
+  .hnav{display:flex; gap:14px; justify-content:center; margin-top:36px}
+  .hnav a{
+    font-family:'Source Code Pro',monospace;
+    color:var(--brand); text-decoration:none;
+    font-size:13px; letter-spacing:.18em;
+    border:1px solid var(--brand);
+    padding:10px 18px;
+    transition:background .2s, color .2s;
+  }
+  .hnav a:hover{background:var(--brand); color:#000}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:18vh 7vw 12vh;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .bgvid{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .hero::after{                 /* затемнение поверх видео */
+    content:'';
+    position:absolute; inset:0;
+    background:rgba(0,0,0,.68);
+    z-index:1;
+  }
+  .hero > h1, .hero > .sub, .hero > .hnav, .hero > .scroll{
+    position:relative; z-index:2;
+  }
+  .hero .label{
+    font-family:'Source Code Pro',monospace;
+    color:var(--brand); font-size:13px; letter-spacing:.24em;
+    margin-bottom:30px;
+  }
+  .hero h1{
+    font-family:'Press Start 2P','Source Code Pro',monospace;
+    word-spacing:-.45em;
+    font-weight:700; text-transform:uppercase;
+    font-size:clamp(17px, 1.9vw, 30px);
+    line-height:1.75; letter-spacing:-.01em;
+    max-width:34ch;
+  }
+  .hero h1 .accent{color:var(--brand)}
+  .hero .sub{
+    margin-top:34px;
+    font-size:clamp(15px,1.3vw,19px); line-height:1.6;
+    color:#cfcfcf; max-width:56ch;
+  }
+  .hero .scroll{
+    position:absolute; left:50%; bottom:4.5vh;
+    transform:translateX(-50%);
+    font-family:'Source Code Pro',monospace;
+    font-size:12px; letter-spacing:.34em; color:#888;
+    animation: bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+  /* ---------- работы ---------- */
+  .works{padding:0 4vw 14vh}
+  .row{
+    display:grid;
+    grid-template-columns: minmax(280px, 38%) 1fr;
+    gap: 0 4.5vw;
+    align-items:start;
+    border-top:1px solid var(--line);
+    padding:6.5vh 1vw 7vh;
+  }
+  .thumb{
+    aspect-ratio:16/9;
+    background:#101010;
+    border:1px solid #1f1f1f;
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Source Code Pro',monospace;
+    font-size:11px; letter-spacing:.3em; color:#3a3a3a;
+    transform-origin:left center;
+    will-change:transform,opacity;
+  }
+  .thumb img{
+    width:100%; height:100%;
+    object-fit:cover; display:block;
+  }
+  .row h2{
+    font-family:'Press Start 2P','Source Code Pro',monospace;
+    word-spacing:-.45em;
+    font-weight:700; text-transform:uppercase;
+    font-size:clamp(24px, 3.4vw, 52px);
+    line-height:1.1; letter-spacing:-.015em;
+    transform-origin:left bottom;
+    will-change:transform,opacity;
+  }
+  .row .tag{
+    grid-column:2;
+    margin-top:26px;
+    font-family:'Source Code Pro',monospace;
+    font-size:12px; letter-spacing:.26em; color:#8a8a8a;
+    will-change:opacity;
+  }
+  .row[data-video]{cursor:pointer}
+
+  /* ховер как в референсе: заголовок прокручивается вверх цветной копией */
+  .row h2{overflow:hidden}
+  .row h2 .roll{
+    display:block; position:relative;
+    transition:transform .5s cubic-bezier(.76,0,.24,1);
+  }
+  .row h2 .roll > span{display:block}
+  .row h2 .roll > span:last-child{
+    position:absolute; top:100%; left:0; width:100%;
+    color:var(--brand);
+  }
+  .row:hover h2 .roll{transform:translateY(-100%)}
+  /* точка у тега при ховере */
+  .row .tag::after{
+    content:''; display:inline-block;
+    width:7px; height:7px; border-radius:50%;
+    background:var(--brand);
+    margin-left:12px; vertical-align:middle;
+    opacity:0; transition:opacity .3s;
+  }
+  .row:hover .tag::after{opacity:1}
+
+  /* ---------- видеоплеер поверх страницы ---------- */
+  #player{
+    position:fixed; inset:0; z-index:50;
+    background:rgba(0,0,0,.94);
+    display:none;
+    align-items:center; justify-content:center;
+  }
+  #player.open{display:flex}
+  #player video{
+    max-width:92vw; max-height:86vh;
+    background:#000;
+    border-radius:12px;
+  }
+  #player .close{
+    position:absolute; top:22px; right:32px;
+    font-size:36px; line-height:1;
+    color:#fff; cursor:pointer;
+    transition:color .2s;
+  }
+  #player .close:hover{color:var(--brand)}
+
+  @media (max-width:760px){
+    .row{grid-template-columns:1fr; gap:22px}
+    .row .tag{grid-column:1; margin-top:6px}
+    header img{height:36px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html"><img src="assets/logo.png" alt="METAFRAME"></a>
+</header>
+
+<section class="hero">
+  <video class="bgvid" src="assets/aivideo-hero.mp4" autoplay muted loop playsinline></video>
+  <h1>Сгенерировать может каждый. Срежиссировать так, чтобы никто не&nbsp;заметил AI, — <span class="accent">единицы.</span></h1>
+  <p class="sub">Наши 10&nbsp;лет в&nbsp;кинопроизводстве докажут вам это. Листайте вниз — смотрите сами.</p>
+  <nav class="hnav">
+    <a href="it-web.html">IT&amp;WEB</a>
+    <a href="ai-academy.html">AI - ACADEMY</a>
+  </nav>
+  <span class="scroll">SCROLL ↓</span>
+</section>
+
+<section class="works">
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/AIGA.mov">
+    <div class="thumb"><img src="assets/works/aiga.jpg" alt="AIGA"></div>
+    <h2><span class="roll"><span>AIGA</span><span aria-hidden="true">AIGA</span></span></h2>
+    <p class="tag">GRAPPLING TOURNAMENT OPENING</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/bigsomprince.mov">
+    <div class="thumb"><img src="assets/works/bigsom.jpg" alt="V $ X V Prince &amp; Big Som"></div>
+    <h2><span class="roll"><span>V $ X V Prince &amp; Big Som</span><span aria-hidden="true">V $ X V Prince &amp; Big Som</span></span></h2>
+    <p class="tag">«СКОЛЬКО БАКСОВ» · MUSIC VIDEO</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/ARTESIAN%20KRYSTAL%20WATER.mov">
+    <div class="thumb"><img src="assets/works/artesian.jpg" alt="Artesian Krystal Water"></div>
+    <h2><span class="roll"><span>Artesian Krystal Water</span><span aria-hidden="true">Artesian Krystal Water</span></span></h2>
+    <p class="tag">AI COMMERCIAL</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/caviarhouse.mov">
+    <div class="thumb"><img src="assets/works/caviarhouse.jpg" alt="Caviar House"></div>
+    <h2><span class="roll"><span>Caviar House</span><span aria-hidden="true">Caviar House</span></span></h2>
+    <p class="tag">ЧЁРНАЯ ИКРА · AI COMMERCIAL</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/ruit.mov">
+    <div class="thumb"><img src="assets/works/ruit.jpg" alt="Ruit"></div>
+    <h2><span class="roll"><span>Ruit</span><span aria-hidden="true">Ruit</span></span></h2>
+    <p class="tag">АЛЮМИНИЕВЫЕ ПРОФИЛИ · AI COMMERCIAL</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/FINA%D0%9B.mov">
+    <div class="thumb"><img src="assets/works/caster.jpg" alt="Caster UGC app"></div>
+    <h2><span class="roll"><span>Caster UGC app</span><span aria-hidden="true">Caster UGC app</span></span></h2>
+    <p class="tag">ЛАУНЧ СТАРТАПА</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/Livelens%20%281%29.mov">
+    <div class="thumb"><img src="assets/works/livelens.jpg" alt="LiveLens"></div>
+    <h2><span class="roll"><span>LiveLens</span><span aria-hidden="true">LiveLens</span></span></h2>
+    <p class="tag">ЛАУНЧ СТАРТАПА</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/KEMEL%20UI%20BETON.mov">
+    <div class="thumb"><img src="assets/works/kemel.jpg" alt="Kemel Ui Beton"></div>
+    <h2><span class="roll"><span>Kemel Ui Beton</span><span aria-hidden="true">Kemel Ui Beton</span></span></h2>
+    <p class="tag">ПРОИЗВОДСТВО БЕТОНА · AI COMMERCIAL</p>
+  </div>
+
+  <div class="row" data-video="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/rixos2.mp4">
+    <div class="thumb"><img src="assets/works/rixos.jpg" alt="Rixos"></div>
+    <h2><span class="roll"><span>Rixos</span><span aria-hidden="true">Rixos</span></span></h2>
+    <p class="tag">HOTELS &amp; RESORTS · AI COMMERCIAL</p>
+  </div>
+
+</section>
+
+<div id="player">
+  <span class="close" id="plClose">&times;</span>
+  <video id="plVideo" controls playsinline></video>
+</div>
+
+<script>
+  /* клик по работе -> плеер */
+  const player = document.getElementById('player');
+  const plVideo = document.getElementById('plVideo');
+  function closePlayer(){
+    player.classList.remove('open');
+    plVideo.pause(); plVideo.removeAttribute('src'); plVideo.load();
+  }
+  document.querySelectorAll('.row[data-video]').forEach(r=>{
+    r.addEventListener('click', ()=>{
+      plVideo.src = r.dataset.video;
+      player.classList.add('open');
+      plVideo.play().catch(()=>{});
+    });
+  });
+  document.getElementById('plClose').addEventListener('click', closePlayer);
+  player.addEventListener('click', e=>{ if(e.target === player) closePlayer(); });
+  addEventListener('keydown', e=>{ if(e.key === 'Escape') closePlayer(); });
+</script>
+
+<script>
+  /* Раскрытие привязано к позиции скролла (обратимо, как в референсе):
+     у нижней кромки ряд уменьшен и сдвинут влево, к середине экрана
+     доезжает и дорастает до полного размера. */
+  const rows = [...document.querySelectorAll('.row')].map(row=>({
+    row,
+    thumb: row.querySelector('.thumb'),
+    h2:    row.querySelector('h2'),
+    tag:   row.querySelector('.tag')
+  }));
+  const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+  const easeOut = t=>1-Math.pow(1-t,3);
+  /* лёгкий overshoot — "бульк" при подходе ряда к зоне акцента */
+  const backOut = t=>{ const c1=1.70158, c3=c1+1; const u=t-1; return 1 + c3*u*u*u + c1*u*u; };
+
+  let ticking = false;
+  function update(){
+    ticking = false;
+    const vh = innerHeight;
+    const mid = vh*.5;
+    let prevC = null;
+    for (const it of rows){
+      const r = it.row.getBoundingClientRect();
+      /* ряд растёт, пока ЕГО ЦЕНТР не дойдёт до центра экрана;
+         следующий стоит в половинном размере, пока текущий не дорос */
+      const c = r.top + r.height/2;
+      const gap = prevC === null ? Infinity : c - prevC;
+      prevC = c;
+      if (r.bottom < -80 || r.top > vh+80) continue;
+      const entry = vh + r.height/2;
+      const start = Math.min(entry, mid + gap);
+      const p = easeOut(clamp((start - c) / (start - mid), 0, 1));
+      it.thumb.style.transform = `scale(${(.5 + .5*p).toFixed(4)})`;
+      it.thumb.style.opacity   = (.15 + .85*p).toFixed(3);
+      it.h2.style.transform    = `translateX(${(-70*(1-p)).toFixed(1)}px) scale(${(.5 + .5*p).toFixed(4)})`;
+      it.h2.style.opacity      = (.12 + .88*p).toFixed(3);
+      it.tag.style.opacity     = clamp((p-.45)/.55, 0, 1).toFixed(3);
+    }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll);
+  update();
+</script>
+</body>
+</html>
