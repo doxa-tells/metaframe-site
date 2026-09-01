@@ -358,17 +358,39 @@
     /* Бренды и Личности рядом, Квази/Гос переносится вниз */
     .trust{grid-template-columns:1fr 1fr; gap:40px 10vw}
     .trust li{white-space:normal}
-    /* мобила: блок фаундера сам несёт фото — текст всегда ПОВЕРХ него */
+    /* мобила: каждый блок — полноэкранный слайд */
+    #about{
+      min-height:200vh; min-height:200svh;      /* слайд текста + слайд фаундера */
+      padding-bottom:0;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+    }
     #about .bg-bottom{display:none}
+    /* блок фаундера сам несёт фото — текст всегда ПОВЕРХ него */
     .founder{
       position:relative; right:auto; top:auto; z-index:1; text-align:right;
-      margin:9vh -7vw -12vh;               /* во всю ширину, до низа секции */
-      padding:52vw 7vw 9vw;                /* сверху чистое фото, текст к низу */
+      min-height:100vh; min-height:100svh;
+      margin:0 -7vw 0;                      /* во всю ширину */
+      padding:52vw 7vw 10vh;
+      display:flex; flex-direction:column; justify-content:flex-end;
       background:
         linear-gradient(rgba(0,0,0,.12), rgba(0,0,0,.68) 72%),
         url('assets/founder-bg.jpg') center 25% / cover no-repeat;
     }
     .founder-bio{margin-left:auto}
+    #partners{
+      min-height:100vh; min-height:100svh;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    #directions{
+      min-height:200vh; min-height:200svh;      /* слайд направлений + слайд контактов */
+    }
+    .contacts{
+      min-height:100vh; min-height:100svh;
+      margin-top:auto; max-width:none;
+      display:flex; flex-direction:column; justify-content:center;
+      padding-top:0;
+    }
     /* кадр партнёров: держим ДиКаприо в центре */
     #partners{background-position:0 0, 58% 28%}
     #directions h2{text-align:left; white-space:normal}
