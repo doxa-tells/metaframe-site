@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мастер-класс по AI-контенту — METAFRAME</title>
+
+<!-- ===== META PIXEL: вставь свой Pixel ID вместо YOUR_PIXEL_ID ===== -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+<!-- ===== /META PIXEL ===== -->
+
+<style>
+  @font-face{font-family:'Press Start 2P';src:url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+  @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
+  :root{--brand:#00FCFF; --line:#242424}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:#000; color:#fff;
+    font-family:'Source Code Pro', monospace;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 34px;
+    mix-blend-mode:screen;
+  }
+  header img{height:40px; display:block}
+
+  .px{font-family:'Press Start 2P','Source Code Pro',monospace; word-spacing:-.45em; font-weight:700; text-transform:uppercase}
+  .label{color:var(--brand); font-size:12px; letter-spacing:.24em; text-transform:uppercase}
+  .cta{
+    display:inline-block;
+    background:var(--brand); color:#000;
+    text-decoration:none; text-align:center;
+    font-weight:800; text-transform:uppercase;
+    font-size:15px; letter-spacing:.1em;
+    padding:20px 38px;
+    transition:transform .15s ease, box-shadow .2s;
+    box-shadow:0 0 0 rgba(0,252,255,0);
+  }
+  .cta:hover{transform:translateY(-2px); box-shadow:0 8px 40px rgba(0,252,255,.35)}
+  .ghost{
+    display:inline-block;
+    border:1px solid var(--brand); color:var(--brand);
+    text-decoration:none; text-align:center;
+    font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+    padding:14px 24px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:15vh 6vw 10vh;
+    position:relative; overflow:hidden;
+  }
+  .hero .bgvid{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; z-index:0;
+  }
+  .hero::after{content:''; position:absolute; inset:0; background:rgba(0,0,0,.74); z-index:1}
+  .hero > *{position:relative; z-index:2}
+  .hero .label{margin-bottom:28px}
+  .hero h1{
+    font-size:clamp(19px, 2.4vw, 38px);
+    line-height:1.7; letter-spacing:-.01em;
+    max-width:28ch;
+  }
+  .hero h1 .accent{color:var(--brand)}
+  .hero .sub{
+    margin-top:28px;
+    font-size:clamp(15px,1.3vw,19px); line-height:1.65;
+    color:#d6d6d6; max-width:52ch;
+  }
+  .hero .sub b{color:#fff}
+  .hero .cta{margin-top:44px}
+  .seats{
+    margin-top:22px;
+    font-size:12px; letter-spacing:.22em; color:#8a8a8a; text-transform:uppercase;
+  }
+  .seats b{color:var(--brand)}
+
+  /* ---------- секции ---------- */
+  section{padding:12vh 6vw; border-top:1px solid var(--line)}
+  .wrap{max-width:980px; margin:0 auto}
+  h2.px{font-size:clamp(20px,2.6vw,40px); line-height:1.5; margin-bottom:5vh}
+  h2 .accent{color:var(--brand)}
+
+  /* что будет */
+  .list{list-style:none}
+  .list li{
+    position:relative; padding-left:30px;
+    font-size:clamp(15px,1.2vw,18px); line-height:1.65; color:#d6d6d6;
+    margin-bottom:20px;
+  }
+  .list li::before{content:'—'; position:absolute; left:0; color:var(--brand)}
+  .list b{color:#fff}
+
+  /* спикер */
+  .speaker{
+    display:grid; grid-template-columns:minmax(260px,42%) 1fr;
+    gap:6vw; align-items:center;
+  }
+  .speaker .photo{
+    aspect-ratio:4/5;
+    background:url('assets/founder-bg.jpg') 65% 20% / cover no-repeat;
+    border:1px solid #1f1f1f;
+  }
+  .speaker h2{margin-bottom:3vh}
+  .speaker .role{color:var(--brand); font-size:13px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:24px; line-height:1.9}
+  .speaker p{font-size:clamp(15px,1.15vw,18px); line-height:1.7; color:#d6d6d6; margin-bottom:16px}
+  .speaker p b{color:#fff}
+  .quote{
+    margin-top:26px; padding:22px 26px;
+    border-left:2px solid var(--brand);
+    background:#0a0a0a;
+    font-size:clamp(14px,1.1vw,17px); line-height:1.7; color:#eaeaea;
+  }
+
+  /* кому подойдет */
+  .fit{display:grid; grid-template-columns:1fr 1fr; gap:5vw}
+  .fit h3{font-size:13px; letter-spacing:.22em; text-transform:uppercase; margin-bottom:26px}
+  .fit .yes h3{color:var(--brand)}
+  .fit .no h3{color:#666}
+  .fit li{list-style:none; position:relative; padding-left:26px; font-size:clamp(14px,1.1vw,17px); line-height:1.6; color:#d6d6d6; margin-bottom:16px}
+  .fit .yes li::before{content:'+'; position:absolute; left:0; color:var(--brand)}
+  .fit .no li::before{content:'–'; position:absolute; left:0; color:#666}
+  .fit .no li{color:#8f8f8f}
+
+  /* депозит */
+  #deposit .big{
+    font-size:clamp(30px,4.5vw,66px); color:var(--brand); margin-bottom:4vh;
+  }
+  #deposit p{font-size:clamp(15px,1.2vw,18px); line-height:1.7; color:#d6d6d6; max-width:62ch; margin-bottom:18px}
+  #deposit p b{color:#fff}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:3vw; margin-top:5vh}
+  .steps div{border:1px solid var(--line); padding:26px 22px}
+  .steps b{display:block; font-family:'Press Start 2P','Source Code Pro',monospace; color:var(--brand); font-size:18px; margin-bottom:16px}
+  .steps span{font-size:14px; line-height:1.6; color:#c9c9c9}
+
+  /* ---------- анкета ---------- */
+  #form{background:#050505}
+  #form .wrap{max-width:640px}
+  form .field{margin-bottom:30px}
+  form label.q{
+    display:block; font-size:13px; letter-spacing:.18em; text-transform:uppercase;
+    color:#9a9a9a; margin-bottom:14px;
+  }
+  form label.q em{color:var(--brand); font-style:normal}
+  input[type=text], input[type=tel], select, textarea{
+    width:100%;
+    background:transparent; border:none; border-bottom:1px solid #333;
+    color:#fff; font-family:'Source Code Pro',monospace;
+    font-size:16px; letter-spacing:.06em;
+    padding:12px 2px; outline:none;
+    transition:border-color .25s;
+    border-radius:0;
+  }
+  select{appearance:none; -webkit-appearance:none; cursor:pointer}
+  select option{background:#0a0a0a; color:#fff}
+  textarea{resize:vertical; min-height:74px}
+  input:focus, select:focus, textarea:focus{border-color:var(--brand)}
+  input::placeholder, textarea::placeholder{color:#555; letter-spacing:.14em}
+  .radios{display:flex; flex-direction:column; gap:14px}
+  .radios label{
+    display:flex; align-items:flex-start; gap:14px;
+    border:1px solid #2a2a2a; padding:16px 18px;
+    font-size:15px; line-height:1.5; color:#d6d6d6;
+    cursor:pointer; transition:border-color .2s, background .2s;
+  }
+  .radios input{accent-color:var(--brand); margin-top:3px; flex:0 0 auto}
+  .radios label:has(input:checked){border-color:var(--brand); background:rgba(0,252,255,.05); color:#fff}
+  button.cta{border:none; cursor:pointer; width:100%; font-family:'Source Code Pro',monospace}
+  .fineprint{margin-top:18px; font-size:12px; line-height:1.7; color:#777}
+  #thanks{display:none; text-align:center; padding:8vh 0}
+  #thanks .px{font-size:clamp(18px,2.2vw,30px); color:var(--brand); margin-bottom:24px}
+  #thanks p{color:#d6d6d6; line-height:1.7}
+
+  /* появление */
+  .fade{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease}
+  .fade.in{opacity:1; transform:none}
+
+  @media (max-width:760px){
+    header img{height:32px}
+    section{padding:10vh 7vw}
+    .speaker{grid-template-columns:1fr; gap:30px}
+    .fit{grid-template-columns:1fr; gap:40px}
+    .steps{grid-template-columns:1fr}
+    .hero .cta{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html"><img src="assets/logo.png" alt="METAFRAME"></a>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" style="border-top:none">
+  <video class="bgvid" src="assets/aivideo-hero.mp4" autoplay muted loop playsinline></video>
+  <p class="label">Бесплатный мастер-класс · Астана · Nazarbayev University</p>
+  <h1 class="px">Зарабатывай от <span class="accent">500&nbsp;000&nbsp;₸</span> в&nbsp;месяц, создавая AI-контент</h1>
+  <p class="sub">За один вечер ты своими руками сделаешь <b>ИИ-клип и постер с нуля</b> — прямо с телефона, без мощного компьютера. Покажет <b>ex-специалист Higgsfield</b>.</p>
+  <a class="cta" href="#form" onclick="try{fbq('track','InitiateCheckout')}catch(e){}">Занять место</a>
+  <p class="seats">Осталось <b>10 мест</b> · Участие бесплатное</p>
+</section>
+
+<!-- ===================== ЧТО БУДЕТ ===================== -->
+<section>
+  <div class="wrap fade">
+    <p class="label" style="margin-bottom:26px">Программа</p>
+    <h2 class="px">Что ты унесёшь с&nbsp;мастер-класса</h2>
+    <ul class="list">
+      <li><b>Свой ИИ-клип и постер, сделанные с нуля за 20 минут</b> — не смотришь, а делаешь вместе с ведущим.</li>
+      <li><b>Фишки, лайфхаки и обходы нейросетей изнутри Higgsfield</b> — то, чего нет в туториалах на YouTube.</li>
+      <li>Как выпускать <b>новые ролики и постеры каждый день</b> — простым языком, с телефона.</li>
+      <li><b>Где искать первых клиентов</b> и сколько брать за работу, чтобы выйти на 500 000 ₸ в месяц.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== СПИКЕР ===================== -->
+<section>
+  <div class="wrap speaker fade">
+    <div class="photo"></div>
+    <div>
+      <p class="label" style="margin-bottom:24px">Ведущий</p>
+      <h2 class="px">Дархан Телманов</h2>
+      <p class="role">ex. Generative Director — Higgsfield<br>Top-1 AI Creator в Астане · Основатель METAFRAME</p>
+      <p>Работал генеративным специалистом внутри <b>Higgsfield</b> — одной из главных AI-видео платформ мира. Победитель Higgsfield World Championship 2025 среди 5000+ участников.</p>
+      <div class="quote">«Я знаю эти нейросети изнутри: лучшие лайфхаки, фишки и обходы ограничений, которые никогда не попадут в публичные туториалы. На МК отдаю их за один вечер.»</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== КОМУ ===================== -->
+<section>
+  <div class="wrap fade">
+    <h2 class="px">Кому подойдёт</h2>
+    <div class="fit">
+      <ul class="yes">
+        <h3>Тебе — если ты</h3>
+        <li>SMM-щик, дизайнер, маркетолог — хочешь делать контент в 10 раз быстрее и дороже</li>
+        <li>Предприниматель — хочешь перестать платить подрядчикам за каждый ролик</li>
+        <li>Новичок — ищешь профессию, где платят уже через месяц практики</li>
+        <li>Готов прийти и делать руками, а не просто послушать</li>
+      </ul>
+      <ul class="no">
+        <h3>Не подойдёт — если</h3>
+        <li>Ждёшь волшебную кнопку «деньги» без практики</li>
+        <li>Не готов уделить один вечер полностью</li>
+        <li>Записываешься «на всякий случай» и не приходишь</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ДЕПОЗИТ ===================== -->
+<section id="deposit">
+  <div class="wrap fade">
+    <p class="label" style="margin-bottom:26px">Почему депозит, если МК бесплатный</p>
+    <p class="px big">5 000 ₸ → вернём на входе</p>
+    <p>Мастер-класс <b>полностью бесплатный</b>. Но мест мало, а «записался и не пришёл» отнимает место у того, кто реально хотел попасть.</p>
+    <p>Поэтому место бронируется возвратным депозитом <b>5 000 ₸</b>. Пришёл — <b>получил депозит обратно на входе</b>, целиком. Не пришёл без предупреждения — депозит не возвращается.</p>
+    <div class="steps">
+      <div><b>01</b><span>Заполняешь анкету ниже — мы связываемся в WhatsApp</span></div>
+      <div><b>02</b><span>Вносишь депозит 5 000 ₸ — место закреплено за тобой</span></div>
+      <div><b>03</b><span>Приходишь на МК — забираешь 5 000 ₸ на входе</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== АНКЕТА ===================== -->
+<section id="form">
+  <div class="wrap fade">
+    <p class="label" style="margin-bottom:26px">Анкета участника</p>
+    <h2 class="px">Займи своё место</h2>
+
+    <form id="mkForm">
+      <div class="field">
+        <label class="q" for="fName">Имя <em>*</em></label>
+        <input type="text" id="fName" name="name" placeholder="КАК К ТЕБЕ ОБРАЩАТЬСЯ" required>
+      </div>
+
+      <div class="field">
+        <label class="q" for="fPhone">Телефон (WhatsApp) <em>*</em></label>
+        <input type="tel" id="fPhone" name="phone" placeholder="+7 ___ ___ __ __" required>
+      </div>
+
+      <div class="field">
+        <label class="q" for="fWork">Чем занимаешься</label>
+        <select id="fWork" name="work">
+          <option value="" selected disabled>ВЫБЕРИ ВАРИАНТ</option>
+          <option>SMM / маркетинг</option>
+          <option>Дизайн / креатив</option>
+          <option>Предприниматель</option>
+          <option>Студент</option>
+          <option>Другое</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="q">Опыт с нейросетями</label>
+        <div class="radios">
+          <label><input type="radio" name="exp" value="Не пробовал(а)" required> Ещё не пробовал(а)</label>
+          <label><input type="radio" name="exp" value="Пробовал(а) пару раз"> Пробовал(а) пару раз</label>
+          <label><input type="radio" name="exp" value="Пользуюсь регулярно"> Пользуюсь регулярно</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="q" for="fGoal">Зачем идёшь на МК? Одним предложением</label>
+        <textarea id="fGoal" name="goal" placeholder="НАПРИМЕР: ХОЧУ ДЕЛАТЬ РОЛИКИ ДЛЯ СВОЕГО МАГАЗИНА"></textarea>
+      </div>
+
+      <div class="field">
+        <label class="q">МК бесплатный. Готов(а) внести возвратный депозит 5 000 ₸, чтобы закрепить место? <em>*</em></label>
+        <div class="radios">
+          <label><input type="radio" name="deposit" value="Да, готов(а)" required> Да, готов(а) — верну на входе</label>
+          <label><input type="radio" name="deposit" value="Нет"> Нет, не готов(а)</label>
+        </div>
+      </div>
+
+      <button class="cta" type="submit">Отправить анкету</button>
+      <p class="fineprint">Нажимая кнопку, ты соглашаешься на обработку данных. После отправки мы напишем тебе в WhatsApp с деталями: дата, время, реквизиты для депозита.</p>
+    </form>
+
+    <div id="thanks">
+      <p class="px">Анкета отправлена</p>
+      <p>Мы свяжемся с тобой в WhatsApp в течение пары часов.<br>Место закрепим после депозита — его вернём на входе.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  /* появление секций */
+  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.15});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+
+  /* ===== НАСТРОЙКИ ФОРМЫ ===== */
+  const WHATSAPP = '77000000000';        /* TODO: твой номер WhatsApp без + */
+  const FORM_ENDPOINT = '';              /* опционально: Formspree/скрипт — 'https://formspree.io/f/XXXX' */
+
+  document.getElementById('mkForm').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const d = Object.fromEntries(f.entries());
+    const depositYes = /Да/.test(d.deposit || '');
+
+    /* Meta Pixel: Lead всегда; квалифицированный (готов к депозиту) — CompleteRegistration */
+    try{
+      fbq('track','Lead');
+      if (depositYes) fbq('track','CompleteRegistration');
+    }catch(err){}
+
+    if (FORM_ENDPOINT){
+      try{ await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:f}); }catch(err){}
+    }
+
+    const msg = encodeURIComponent(
+      'Заявка на МК по AI-контенту\n' +
+      'Имя: ' + (d.name||'') + '\n' +
+      'Телефон: ' + (d.phone||'') + '\n' +
+      'Занятие: ' + (d.work||'—') + '\n' +
+      'Опыт с ИИ: ' + (d.exp||'—') + '\n' +
+      'Цель: ' + (d.goal||'—') + '\n' +
+      'Депозит 5000₸: ' + (d.deposit||'—')
+    );
+    e.target.style.display = 'none';
+    document.getElementById('thanks').style.display = 'block';
+    window.open('https://wa.me/' + WHATSAPP + '?text=' + msg, '_blank');
+  });
+</script>
+</body>
+</html>
