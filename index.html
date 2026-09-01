@@ -421,34 +421,34 @@
 
 <section id="about">
   <div class="bg-bottom" aria-hidden="true"></div>
-  <h2>IT, AI и Кино</h2>
-  <p class="lead">За плечами METAFRAME 11 лет в кино и рекламе, более 15 лет в разработке ИТ-продуктов. Мы режиссируем AI-контент для компаний мировых уровней, а также строим цифровые продукты под реальные задачи бизнеса. Один партнёр на весь цикл: от идеи до работающей технологии с визуальной упаковкой.</p>
+  <h2 data-i18n="about_h2">IT, AI и Кино</h2>
+  <p class="lead" data-i18n="about_lead">За плечами METAFRAME 11 лет в кино и рекламе, более 15 лет в разработке ИТ-продуктов. Мы режиссируем AI-контент для компаний мировых уровней, а также строим цифровые продукты под реальные задачи бизнеса. Один партнёр на весь цикл: от идеи до работающей технологии с визуальной упаковкой.</p>
 
   <div class="founder">
-    <p class="founder-name">Дархан Телманов</p>
-    <p class="founder-bio">Основатель студии. Top-1 AI Creator в Астане среди 5000+ участников Case Championship.<br>ex. generative director Higgsfield (November 2025).</p>
+    <p class="founder-name" data-i18n="f_name">Дархан Телманов</p>
+    <p class="founder-bio" data-i18n="f_bio">Основатель студии. Top-1 AI Creator в Астане среди 5000+ участников Case Championship.<br>ex. generative director Higgsfield (November 2025).</p>
     <img class="award" id="award" src="assets/award.png" alt="Winner — Higgsfield World Championship 2025">
   </div>
 </section>
 
 <section id="partners">
   <div class="trust-block">
-    <h2>Нам доверяют</h2>
+    <h2 data-i18n="trust_h2">Нам доверяют</h2>
     <div class="trust">
-      <ul>
+      <ul data-i18n="col_brands">
         <h3>Бренды</h3>
         <li>Salem Ent.</li><li>Unico Play</li><li>Galmart</li><li>Hyundai</li>
         <li>Porsche</li><li>BI Group</li><li>Mercedes-Benz</li><li>Kaspi Bank</li>
         <li>Sensata</li><li>MyCar</li><li>Geely</li>
         <li>Zebra Coffee</li>
       </ul>
-      <ul>
+      <ul data-i18n="col_persons">
         <h3>Личности</h3>
         <li>Нурлан Сабуров</li><li>Данияр Ашимов</li><li>Санжар Токтыбаев</li>
         <li>Айдын Рахимбаев</li><li>Айтым Жакупов</li><li>Truwer</li>
         <li>Niman</li><li>Lucaveros</li><li>Бустер</li><li>Virtus Pro</li>
       </ul>
-      <ul>
+      <ul data-i18n="col_gov">
         <h3>Квази / Гос</h3>
         <li>ХК «Барыс»</li><li>Все казахстанские телеканалы</li><li>МВД</li>
         <li>МП ИИ</li><li>МЧС</li><li>УСБ</li><li>УПН</li><li>КПН</li>
@@ -460,7 +460,7 @@
 </section>
 
 <section id="directions">
-  <h2>Наши ключевые направления и&nbsp;крайние работы*</h2>
+  <h2 data-i18n="dirs_h2">Наши ключевые направления и&nbsp;крайние работы</h2>
   <div class="dirs">
     <a href="ai-video.html">AI - Video</a>
     <a href="ai-academy.html">AI Academy</a>
@@ -468,14 +468,14 @@
   </div>
 
   <div class="contacts">
-    <h2>Контакты</h2>
-    <p class="note">По вопросам сотрудничества и партнёрств</p>
+    <h2 data-i18n="c_h2">Контакты</h2>
+    <p class="note" data-i18n="c_note">По вопросам сотрудничества и партнёрств</p>
     <form id="cbForm">
-      <input type="text" id="cbName" placeholder="ИМЯ" required>
-      <input type="tel" id="cbPhone" placeholder="ТЕЛЕФОН" required>
-      <button type="submit">Заказать звонок</button>
+      <input type="text" id="cbName" data-i18n-ph="c_name" placeholder="ИМЯ" required>
+      <input type="tel" id="cbPhone" data-i18n-ph="c_phone" placeholder="ТЕЛЕФОН" required>
+      <button type="submit" data-i18n="c_btn">Заказать звонок</button>
     </form>
-    <p class="addr">г. Астана, Nazarbayev University, офис 120, 128<br>ЧК «Caster Limited»</p>
+    <p class="addr" data-i18n="c_addr">г. Астана, Nazarbayev University, офис 120, 128<br>ЧК «Caster Limited»</p>
   </div>
 </section>
 
@@ -604,6 +604,65 @@
   }
 
   addEventListener('resize', ()=>{ if(!started) fitWord(); });
+})();
+</script>
+
+<script>
+/* i18n: язык выбирается по языку устройства (ru по умолчанию, иначе en/es/kk) */
+(function(){
+  const D = {
+  en: {
+    about_h2:"IT, AI & Film",
+    about_lead:"METAFRAME brings 11 years in film and advertising and 15+ years in IT product development. We direct AI content for world-class companies and build digital products for real business needs. One partner for the full cycle: from idea to working technology with visual packaging.",
+    f_name:"Darkhan Telmanov",
+    f_bio:"Founder of the studio. Top-1 AI Creator in Astana among 5,000+ Case Championship participants.<br>ex. generative director Higgsfield (November 2025).",
+    trust_h2:"They trust us",
+    col_brands:"<h3>Brands</h3><li>Salem Ent.</li><li>Unico Play</li><li>Galmart</li><li>Hyundai</li><li>Porsche</li><li>BI Group</li><li>Mercedes-Benz</li><li>Kaspi Bank</li><li>Sensata</li><li>MyCar</li><li>Geely</li><li>Zebra Coffee</li>",
+    col_persons:"<h3>Public figures</h3><li>Nurlan Saburov</li><li>Daniyar Ashimov</li><li>Sanzhar Toktybayev</li><li>Aidyn Rakhimbayev</li><li>Aitym Zhakupov</li><li>Truwer</li><li>Niman</li><li>Lucaveros</li><li>Booster</li><li>Virtus Pro</li>",
+    col_gov:"<h3>Quasi-gov / State</h3><li>HC Barys</li><li>All Kazakhstani TV channels</li><li>Ministry of Internal Affairs</li><li>Ministry of AI</li><li>Ministry of Emergency Situations</li><li>USB</li><li>UPN</li><li>KPN</li><li>Transport Police</li><li>Astana FC</li><li>KFF</li><li>Ministry of Culture</li>",
+    dirs_h2:"Our key directions and latest works",
+    c_h2:"Contacts",
+    c_note:"For cooperation and partnership inquiries",
+    c_name:"NAME", c_phone:"PHONE", c_btn:"Request a call",
+    c_addr:"Astana, Nazarbayev University, office 120, 128<br>Caster Limited"
+  },
+  es: {
+    about_h2:"IT, IA y Cine",
+    about_lead:"METAFRAME cuenta con 11 años en cine y publicidad y más de 15 en desarrollo de productos IT. Dirigimos contenido con IA para compañías de nivel mundial y construimos productos digitales para tareas reales de negocio. Un solo socio para todo el ciclo: de la idea a la tecnología funcionando con empaque visual.",
+    f_name:"Darkhan Telmanov",
+    f_bio:"Fundador del estudio. Top-1 AI Creator en Astaná entre más de 5000 participantes del Case Championship.<br>ex generative director Higgsfield (noviembre 2025).",
+    trust_h2:"Confían en nosotros",
+    col_brands:"<h3>Marcas</h3><li>Salem Ent.</li><li>Unico Play</li><li>Galmart</li><li>Hyundai</li><li>Porsche</li><li>BI Group</li><li>Mercedes-Benz</li><li>Kaspi Bank</li><li>Sensata</li><li>MyCar</li><li>Geely</li><li>Zebra Coffee</li>",
+    col_persons:"<h3>Personalidades</h3><li>Nurlan Saburov</li><li>Daniyar Ashimov</li><li>Sanzhar Toktybayev</li><li>Aidyn Rakhimbayev</li><li>Aitym Zhakupov</li><li>Truwer</li><li>Niman</li><li>Lucaveros</li><li>Booster</li><li>Virtus Pro</li>",
+    col_gov:"<h3>Cuasi-estatal / Gobierno</h3><li>HC Barys</li><li>Todos los canales de TV de Kazajistán</li><li>Ministerio del Interior</li><li>Ministerio de IA</li><li>Ministerio de Emergencias</li><li>USB</li><li>UPN</li><li>KPN</li><li>Policía de transporte</li><li>Astana FC</li><li>KFF</li><li>Ministerio de Cultura</li>",
+    dirs_h2:"Nuestras direcciones clave y trabajos recientes",
+    c_h2:"Contactos",
+    c_note:"Para cooperación y alianzas",
+    c_name:"NOMBRE", c_phone:"TELÉFONO", c_btn:"Solicitar llamada",
+    c_addr:"Astaná, Nazarbayev University, oficinas 120 y 128<br>Caster Limited"
+  },
+  kk: {
+    about_h2:"IT, AI және Кино",
+    about_lead:"METAFRAME артында кино мен жарнамада 11 жыл, IT-өнімдер әзірлеуде 15+ жыл тәжірибе бар. Біз әлемдік деңгейдегі компанияларға AI-контент режиссурасын жасаймыз және бизнестің нақты міндеттеріне цифрлық өнімдер құрамыз. Идеядан жұмыс істейтін технологияға дейін визуалды қаптамасымен — бір серіктес.",
+    f_name:"Дархан Телманов",
+    f_bio:"Студия негізін қалаушы. Case Championship 5000+ қатысушысының арасында Астанадағы Top-1 AI Creator.<br>ex. generative director Higgsfield (қараша 2025).",
+    trust_h2:"Бізге сенім артады",
+    col_brands:"<h3>Брендтер</h3><li>Salem Ent.</li><li>Unico Play</li><li>Galmart</li><li>Hyundai</li><li>Porsche</li><li>BI Group</li><li>Mercedes-Benz</li><li>Kaspi Bank</li><li>Sensata</li><li>MyCar</li><li>Geely</li><li>Zebra Coffee</li>",
+    col_persons:"<h3>Тұлғалар</h3><li>Нұрлан Сабұров</li><li>Данияр Әшімов</li><li>Санжар Тоқтыбаев</li><li>Айдын Рахимбаев</li><li>Айтым Жақыпов</li><li>Truwer</li><li>Niman</li><li>Lucaveros</li><li>Бустер</li><li>Virtus Pro</li>",
+    col_gov:"<h3>Квази / Мем</h3><li>«Барыс» ХК</li><li>Қазақстанның барлық телеарналары</li><li>ІІМ</li><li>ЖИ министрлігі</li><li>ТЖМ</li><li>УСБ</li><li>УПН</li><li>КПН</li><li>Көлік полициясы</li><li>«Астана» ФК</li><li>ҚФФ</li><li>Мәдениет министрлігі</li>",
+    dirs_h2:"Негізгі бағыттарымыз және соңғы жұмыстар",
+    c_h2:"Байланыс",
+    c_note:"Ынтымақтастық және серіктестік сұрақтары бойынша",
+    c_name:"АТЫ", c_phone:"ТЕЛЕФОН", c_btn:"Қоңырауға тапсырыс",
+    c_addr:"Астана қ., Nazarbayev University, 120, 128 кеңсе<br>«Caster Limited»"
+  }};
+  const l2 = (navigator.language || 'ru').slice(0,2).toLowerCase();
+  const lang = l2 === 'ru' ? 'ru' : (D[l2] ? l2 : 'en');
+  document.documentElement.lang = lang;
+  if (lang === 'ru') return;
+  const d = D[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const v = d[el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{ const v = d[el.dataset.i18nPh]; if (v != null) el.placeholder = v; });
 })();
 </script>
 

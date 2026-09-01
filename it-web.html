@@ -37,7 +37,23 @@
 </head>
 <body>
   <h1>IT &amp; Web</h1>
-  <p>РАЗДЕЛ В РАЗРАБОТКЕ</p>
-  <a href="index.html">&larr; НА ГЛАВНУЮ</a>
+  <p data-i18n="wip">РАЗДЕЛ В РАЗРАБОТКЕ</p>
+  <a href="index.html" data-i18n="home">&larr; НА ГЛАВНУЮ</a>
+
+<script>
+(function(){
+  const D = {
+    en:{wip:"SECTION IN DEVELOPMENT", home:"&larr; HOME"},
+    es:{wip:"SECCIÓN EN DESARROLLO", home:"&larr; INICIO"},
+    kk:{wip:"БӨЛІМ ӘЗІРЛЕНУДЕ", home:"&larr; БАСТЫ БЕТКЕ"}
+  };
+  const l2 = (navigator.language || 'ru').slice(0,2).toLowerCase();
+  const lang = l2 === 'ru' ? 'ru' : (D[l2] ? l2 : 'en');
+  document.documentElement.lang = lang;
+  if (lang === 'ru') return;
+  const d = D[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const v = d[el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+})();
+</script>
 </body>
 </html>
