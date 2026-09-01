@@ -358,8 +358,16 @@
     /* Бренды и Личности рядом, Квази/Гос переносится вниз */
     .trust{grid-template-columns:1fr 1fr; gap:40px 10vw}
     .trust li{white-space:normal}
-    /* имя и био фаундера: relative+z-index, иначе их перекрывает фоновое фото */
-    .founder{position:relative; z-index:1; text-align:left; margin-top:9vh}
+    /* мобила: блок фаундера сам несёт фото — текст всегда ПОВЕРХ него */
+    #about .bg-bottom{display:none}
+    .founder{
+      position:relative; right:auto; top:auto; z-index:1; text-align:left;
+      margin:9vh -7vw -12vh;               /* во всю ширину, до низа секции */
+      padding:52vw 7vw 9vw;                /* сверху чистое фото, текст к низу */
+      background:
+        linear-gradient(rgba(0,0,0,.12), rgba(0,0,0,.68) 72%),
+        url('assets/founder-bg.jpg') center 25% / cover no-repeat;
+    }
     .founder-bio{margin-left:0}
     /* кадр партнёров: держим ДиКаприо в центре */
     #partners{background-position:0 0, 58% 28%}
