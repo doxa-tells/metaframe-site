@@ -183,16 +183,16 @@
     color:#fff;
     min-height:100vh;
     padding:8vh 7vw 10vh;
-    display:flex; flex-direction:column; justify-content:flex-start;
+    display:flex; flex-direction:column; justify-content:center;
     position:relative; overflow:hidden;
     background:#000;
   }
-  /* фото — только верхняя половина слайда, книзу растворяется в чёрный */
+  /* фото — на весь слайд */
   #directions::before{
     content:'';
-    position:absolute; inset:0 0 50% 0; z-index:0;
+    position:absolute; inset:0; z-index:0;
     background:
-      linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.85) 85%, #000 100%),
+      linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
       url('assets/directions-bg.jpg') center 30% / cover no-repeat;
   }
   #directions > *{position:relative; z-index:1}
@@ -202,9 +202,9 @@
     font-weight:700; text-transform:uppercase;
     font-size:clamp(22px, 2.2vw, 40px);
     line-height:1.45;
-    text-align:right;
+    text-align:center;
     white-space:normal;
-    margin:0 0 4vh;
+    margin:0 0 6vh;
   }
   .label{
     font-family:'Source Code Pro', monospace;
@@ -305,7 +305,7 @@
   .dirs{
     display:grid; grid-template-columns:repeat(3, minmax(170px, 240px));
     gap:16px;
-    justify-content:end;   /* под правым заголовком */
+    justify-content:center;
   }
   /* пиксельная кнопка: рамка = подложка бренд-цвета, внутренность — ::before */
   .pxbtn{
@@ -332,15 +332,18 @@
     font-size:clamp(13px, 1.05vw, 16px); letter-spacing:.08em;
   }
 
-  /* ---------- контакты (слева снизу на слайде направлений) ---------- */
-  .contacts{
-    margin-top:auto;
-    max-width:520px;
-    padding-top:10vh;
+  /* ---------- контакты: отдельный компактный блок ---------- */
+  #contactsSec{
+    background:#000; color:#fff;
+    padding:12vh 7vw 14vh;
   }
-  #directions .contacts h2{
-    text-align:left; white-space:normal;
-    margin:0 0 4vh;
+  .contacts{max-width:520px}
+  #contactsSec h2{
+    font-family:'Press Start 2P','Source Code Pro',monospace;
+    word-spacing:-.45em;
+    font-weight:700; text-transform:uppercase;
+    font-size:clamp(18px, 1.7vw, 30px);
+    margin:0 0 3.5vh;
   }
   .contacts .note{
     color:#bdbdbd; font-size:14px; letter-spacing:.04em;
@@ -444,16 +447,6 @@
       min-height:100vh; min-height:100svh;
       display:flex; flex-direction:column; justify-content:center;
     }
-    #directions{
-      min-height:200vh; min-height:200svh;      /* слайд направлений + слайд контактов */
-    }
-    .contacts{
-      min-height:100vh; min-height:100svh;
-      margin-top:auto; max-width:520px;
-      display:flex; flex-direction:column; justify-content:center;
-      padding-top:0;
-    }
-    .contacts .pxbtn{align-self:flex-start; width:auto}
     /* кадр партнёров: держим ДиКаприо в центре */
     #partners{background-position:0 0, 58% 28%}
     /* направления: заголовок и кнопки по центру */
@@ -519,13 +512,15 @@
 </section>
 
 <section id="directions">
-  <h2 data-i18n="dirs_h2">Наши ключевые направления и&nbsp;крайние работы</h2>
+  <h2 data-i18n="dirs_h2">Наши ключевые направления<br>и&nbsp;крайние работы</h2>
   <div class="dirs">
     <a class="pxbtn" href="ai-video.html">AI - Video</a>
     <a class="pxbtn" href="ai-academy.html">AI Academy</a>
     <a class="pxbtn" href="it-web.html">IT &amp; Web</a>
   </div>
+</section>
 
+<section id="contactsSec">
   <div class="contacts">
     <h2 data-i18n="c_h2">Контакты</h2>
     <p class="note" data-i18n="c_note">По вопросам сотрудничества и партнёрств</p>
@@ -689,7 +684,7 @@
     col_brands:"<h3>Brands</h3><li>Salem Ent.</li><li>Unico Play</li><li>Galmart</li><li>Hyundai</li><li>Porsche</li><li>BI Group</li><li>Mercedes-Benz</li><li>Kaspi Bank</li><li>Sensata</li><li>MyCar</li><li>Geely</li><li>Zebra Coffee</li>",
     col_persons:"<h3>Public figures</h3><li>Nurlan Saburov</li><li>Daniyar Ashimov</li><li>Sanzhar Toktybayev</li><li>Aidyn Rakhimbayev</li><li>Aitym Zhakupov</li><li>Truwer</li><li>Niman</li><li>Lucaveros</li><li>Booster</li><li>Virtus Pro</li>",
     col_gov:"<h3>Quasi-gov / State</h3><li>HC Barys</li><li>All Kazakhstani TV channels</li><li>Ministry of Internal Affairs</li><li>Ministry of AI</li><li>Ministry of Emergency Situations</li><li>USB</li><li>UPN</li><li>KPN</li><li>Transport Police</li><li>Astana FC</li><li>KFF</li><li>Ministry of Culture</li>",
-    dirs_h2:"Our key directions and latest works",
+    dirs_h2:"Our key directions<br>and latest works",
     c_h2:"Contacts",
     c_note:"For cooperation and partnership inquiries",
     c_name:"NAME", c_phone:"PHONE", c_btn:"Request a call", c_send:"Send",
@@ -704,7 +699,7 @@
     col_brands:"<h3>Marcas</h3><li>Salem Ent.</li><li>Unico Play</li><li>Galmart</li><li>Hyundai</li><li>Porsche</li><li>BI Group</li><li>Mercedes-Benz</li><li>Kaspi Bank</li><li>Sensata</li><li>MyCar</li><li>Geely</li><li>Zebra Coffee</li>",
     col_persons:"<h3>Personalidades</h3><li>Nurlan Saburov</li><li>Daniyar Ashimov</li><li>Sanzhar Toktybayev</li><li>Aidyn Rakhimbayev</li><li>Aitym Zhakupov</li><li>Truwer</li><li>Niman</li><li>Lucaveros</li><li>Booster</li><li>Virtus Pro</li>",
     col_gov:"<h3>Cuasi-estatal / Gobierno</h3><li>HC Barys</li><li>Todos los canales de TV de Kazajistán</li><li>Ministerio del Interior</li><li>Ministerio de IA</li><li>Ministerio de Emergencias</li><li>USB</li><li>UPN</li><li>KPN</li><li>Policía de transporte</li><li>Astana FC</li><li>KFF</li><li>Ministerio de Cultura</li>",
-    dirs_h2:"Nuestras direcciones clave y trabajos recientes",
+    dirs_h2:"Nuestras direcciones clave<br>y trabajos recientes",
     c_h2:"Contactos",
     c_note:"Para cooperación y alianzas",
     c_name:"NOMBRE", c_phone:"TELÉFONO", c_btn:"Solicitar llamada", c_send:"Enviar",
@@ -719,7 +714,7 @@
     col_brands:"<h3>Брендтер</h3><li>Salem Ent.</li><li>Unico Play</li><li>Galmart</li><li>Hyundai</li><li>Porsche</li><li>BI Group</li><li>Mercedes-Benz</li><li>Kaspi Bank</li><li>Sensata</li><li>MyCar</li><li>Geely</li><li>Zebra Coffee</li>",
     col_persons:"<h3>Тұлғалар</h3><li>Нұрлан Сабұров</li><li>Данияр Әшімов</li><li>Санжар Тоқтыбаев</li><li>Айдын Рахимбаев</li><li>Айтым Жақыпов</li><li>Truwer</li><li>Niman</li><li>Lucaveros</li><li>Бустер</li><li>Virtus Pro</li>",
     col_gov:"<h3>Квази / Мем</h3><li>«Барыс» ХК</li><li>Қазақстанның барлық телеарналары</li><li>ІІМ</li><li>ЖИ министрлігі</li><li>ТЖМ</li><li>УСБ</li><li>УПН</li><li>КПН</li><li>Көлік полициясы</li><li>«Астана» ФК</li><li>ҚФФ</li><li>Мәдениет министрлігі</li>",
-    dirs_h2:"Негізгі бағыттарымыз және соңғы жұмыстар",
+    dirs_h2:"Негізгі бағыттарымыз<br>және соңғы жұмыстар",
     c_h2:"Байланыс",
     c_note:"Ынтымақтастық және серіктестік сұрақтары бойынша",
     c_name:"АТЫ", c_phone:"ТЕЛЕФОН", c_btn:"Қоңырауға тапсырыс", c_send:"Жіберу",
