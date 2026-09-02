@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Мастер-класс по AI-контенту — METAFRAME</title>
 
-<!-- ===== META PIXEL: вставь свой Pixel ID вместо YOUR_PIXEL_ID ===== -->
+<!-- ===== META PIXEL (ID: 105978211332849) ===== -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'YOUR_PIXEL_ID');
+fbq('init', '105978211332849');
 fbq('track', 'PageView');
 </script>
 <!-- ===== /META PIXEL ===== -->
@@ -216,9 +216,6 @@ fbq('track', 'PageView');
   .steps-hint{font-size:12.5px; letter-spacing:.16em; color:#666; text-transform:uppercase; margin-top:10px}
   button.cta{border:none; cursor:pointer; width:100%; font-family:'Source Code Pro',monospace}
   .fineprint{margin-top:18px; font-size:12px; line-height:1.7; color:#777}
-  #thanks{display:none; text-align:center; padding:8vh 0}
-  #thanks .px{font-size:clamp(18px,2.2vw,30px); color:var(--brand); margin-bottom:24px}
-  #thanks p{color:#d6d6d6; line-height:1.7}
 
   /* появление */
   .fade{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease}
@@ -390,10 +387,6 @@ fbq('track', 'PageView');
       </div>
     </form>
 
-    <div id="thanks">
-      <p class="px">Анкета отправлена</p>
-      <p>Мы свяжемся с тобой в WhatsApp в течение пары часов.<br>Место закрепим после депозита — его вернём на входе.</p>
-    </div>
   </div>
 </section>
 
@@ -430,7 +423,6 @@ fbq('track', 'PageView');
   });
 
   /* ===== НАСТРОЙКИ ФОРМЫ ===== */
-  const WHATSAPP = '77000000000';        /* TODO: твой номер WhatsApp без + */
   const FORM_ENDPOINT = '';              /* опционально: Formspree/скрипт — 'https://formspree.io/f/XXXX' */
 
   document.getElementById('mkForm').addEventListener('submit', async e=>{
@@ -439,28 +431,24 @@ fbq('track', 'PageView');
     const d = Object.fromEntries(f.entries());
     const depositYes = /Да/.test(d.deposit || '');
 
-    /* Meta Pixel: Lead всегда; квалифицированный (готов к депозиту) — CompleteRegistration */
-    try{
-      fbq('track','Lead');
-      if (depositYes) fbq('track','CompleteRegistration');
-    }catch(err){}
-
     if (FORM_ENDPOINT){
       try{ await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:f}); }catch(err){}
     }
 
-    const msg = encodeURIComponent(
+    /* текст заявки передаём на mk-thanks.html — WhatsApp человек открывает кнопкой уже там
+       (сразу открывать wa.me + редиректить нельзя: на мобильных это гонка) */
+    const txt =
       'Заявка на МК по AI-контенту\n' +
       'Имя: ' + (d.name||'') + '\n' +
       'Телефон: ' + (d.phone||'') + '\n' +
       'Занятие: ' + (d.work||'—') + '\n' +
       'Опыт с ИИ: ' + (d.exp||'—') + '\n' +
       'Цель: ' + (d.goal||'—') + '\n' +
-      'Депозит 5000₸: ' + (d.deposit||'—')
-    );
-    e.target.style.display = 'none';
-    document.getElementById('thanks').style.display = 'block';
-    window.open('https://wa.me/' + WHATSAPP + '?text=' + msg, '_blank');
+      'Депозит 5000₸: ' + (d.deposit||'—');
+    try{ sessionStorage.setItem('mk_wa_msg', txt); }catch(err){}
+
+    /* конверсия срабатывает на mk-thanks.html; ?d=1 = готов к депозиту */
+    location.href = 'mk-thanks.html' + (depositYes ? '?d=1' : '');
   });
 </script>
 </body>

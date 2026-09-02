@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Анкета отправлена — METAFRAME</title>
+
+<!-- ===== META PIXEL (ID: 105978211332849) ===== -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '105978211332849');
+fbq('track', 'PageView');
+
+/* конверсия — ровно один раз (защита от повторного срабатывания при обновлении) */
+try{
+  if (!sessionStorage.getItem('mk_lead_fired')){
+    fbq('track','Lead');
+    if (new URLSearchParams(location.search).get('d') === '1') fbq('track','CompleteRegistration');
+    sessionStorage.setItem('mk_lead_fired','1');
+  }
+}catch(e){}
+</script>
+<!-- ===== /META PIXEL ===== -->
+
+<style>
+  @font-face{font-family:'Press Start 2P';src:url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+  @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
+  :root{
+    --brand:#00FCFF;
+    --px-clip: polygon(0 12px,4px 12px,4px 4px,12px 4px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 4px) calc(100% - 12px),calc(100% - 4px) calc(100% - 4px),calc(100% - 12px) calc(100% - 4px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 12px),0 calc(100% - 12px));
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh; min-height:100svh;
+    background:#000; color:#fff;
+    font-family:'Source Code Pro',monospace;
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:24px;
+  }
+  img.logo{height:44px; margin-bottom:48px}
+  .label{color:var(--brand); font-size:12px; letter-spacing:.24em; text-transform:uppercase; margin-bottom:24px}
+  h1{
+    font-family:'Press Start 2P','Source Code Pro',monospace; word-spacing:-.45em;
+    font-weight:700; text-transform:uppercase;
+    font-size:clamp(22px, 3.4vw, 42px); line-height:1.4;
+    margin-bottom:26px;
+  }
+  p.sub{color:#bdbdbd; font-size:15px; line-height:1.75; letter-spacing:.04em; max-width:52ch; margin-bottom:44px}
+  .cta{
+    display:inline-block;
+    background:var(--brand); color:#000;
+    text-decoration:none;
+    font-weight:800; text-transform:uppercase;
+    font-size:14px; letter-spacing:.1em;
+    padding:18px 36px;
+    clip-path:var(--px-clip);
+    transition:transform .15s ease, box-shadow .2s;
+  }
+  .cta:hover{transform:translateY(-2px); box-shadow:0 8px 40px rgba(0,252,255,.35)}
+  .home{
+    display:inline-block; margin-top:26px;
+    color:#8a8a8a; text-decoration:none;
+    font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+    transition:color .2s;
+  }
+  .home:hover{color:#fff}
+</style>
+</head>
+<body>
+  <img class="logo" src="assets/logo.png" alt="MetaFrame">
+  <p class="label">Мастер-класс по AI-контенту</p>
+  <h1>Анкета отправлена</h1>
+  <p class="sub">Остался один шаг: жми кнопку — откроется WhatsApp с готовой заявкой, просто отправь сообщение. Мы ответим с деталями: дата, время и реквизиты для депозита. Место закрепим после депозита — его вернём на входе.</p>
+  <a class="cta" id="waBtn" href="#" target="_blank" rel="noopener">Отправить заявку в WhatsApp</a>
+  <a class="home" href="index.html">&larr; На главную METAFRAME</a>
+
+<script>
+  const WHATSAPP = '77068257763';
+  let waUrl = 'https://wa.me/' + WHATSAPP;
+  let txt = 'Хочу на мастер-класс по AI-контенту';
+  try{ txt = sessionStorage.getItem('mk_wa_msg') || txt; }catch(e){}
+  waUrl += '?text=' + encodeURIComponent(txt);
+  document.getElementById('waBtn').href = waUrl;
+</script>
+</body>
+</html>
