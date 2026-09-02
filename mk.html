@@ -20,7 +20,11 @@ fbq('track', 'PageView');
 <style>
   @font-face{font-family:'Press Start 2P';src:url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
   @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
-  :root{--brand:#00FCFF; --line:#242424}
+  :root{
+    --brand:#00FCFF; --line:#242424;
+    /* пиксельно-закруглённые углы (в стиле шрифта) */
+    --px-clip: polygon(0 12px,4px 12px,4px 4px,12px 4px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 4px) calc(100% - 12px),calc(100% - 4px) calc(100% - 4px),calc(100% - 12px) calc(100% - 4px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 12px),0 calc(100% - 12px));
+  }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
@@ -45,10 +49,10 @@ fbq('track', 'PageView');
     font-weight:800; text-transform:uppercase;
     font-size:15px; letter-spacing:.1em;
     padding:20px 38px;
-    transition:transform .15s ease, box-shadow .2s;
-    box-shadow:0 0 0 rgba(0,252,255,0);
+    clip-path:var(--px-clip);
+    transition:transform .15s ease, filter .2s;
   }
-  .cta:hover{transform:translateY(-2px); box-shadow:0 8px 40px rgba(0,252,255,.35)}
+  .cta:hover{transform:translateY(-2px); filter:drop-shadow(0 8px 28px rgba(0,252,255,.45))}
   .ghost{
     display:inline-block;
     border:1px solid var(--brand); color:var(--brand);
@@ -69,9 +73,9 @@ fbq('track', 'PageView');
     position:absolute; inset:0; width:100%; height:100%;
     object-fit:cover; z-index:0;
   }
-  .hero::after{content:''; position:absolute; inset:0; background:rgba(0,0,0,.74); z-index:1}
+  .hero::after{content:''; position:absolute; inset:0; background:rgba(0,0,0,.84); z-index:1}
   .hero > *{position:relative; z-index:2}
-  .hero .label{margin-bottom:28px}
+  .hero .label{margin-bottom:28px; font-weight:800; font-size:13px}
   .hero h1{
     font-size:clamp(19px, 2.4vw, 38px);
     line-height:1.7; letter-spacing:-.01em;
@@ -88,19 +92,25 @@ fbq('track', 'PageView');
   .when{
     margin-top:30px;
     font-size:clamp(13px,1.1vw,16px); letter-spacing:.22em;
-    color:#fff; text-transform:uppercase;
-    border:1px solid var(--line);
+    color:#fff; text-transform:uppercase; font-weight:800;
+    border:1px solid #3a3a3a;
     padding:12px 20px;
   }
   .seats{
     margin-top:22px;
-    font-size:12px; letter-spacing:.22em; color:#8a8a8a; text-transform:uppercase;
+    font-size:12.5px; letter-spacing:.22em; color:#c9c9c9; text-transform:uppercase; font-weight:700;
   }
   .seats b{color:var(--brand)}
 
   /* ---------- секции ---------- */
   section{padding:12vh 6vw; border-top:1px solid var(--line)}
   .wrap{max-width:980px; margin:0 auto}
+
+  /* программа: видео-фон */
+  .prog{position:relative; overflow:hidden}
+  .prog .bgvid{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0}
+  .prog::after{content:''; position:absolute; inset:0; background:rgba(0,0,0,.78); z-index:1}
+  .prog .wrap{position:relative; z-index:2}
   h2.px{font-size:clamp(20px,2.6vw,40px); line-height:1.5; margin-bottom:5vh}
   h2 .accent{color:var(--brand)}
 
@@ -152,16 +162,9 @@ fbq('track', 'PageView');
   .fit .no li::before{content:'–'; position:absolute; left:0; color:#666}
   .fit .no li{color:#8f8f8f}
 
-  /* депозит */
-  #deposit .big{
-    font-size:clamp(30px,4.5vw,66px); color:var(--brand); margin-bottom:4vh;
-  }
-  #deposit p{font-size:clamp(15px,1.2vw,18px); line-height:1.7; color:#d6d6d6; max-width:62ch; margin-bottom:18px}
+  /* депозит — короткая строка */
+  #deposit p{font-size:clamp(15px,1.2vw,18px); line-height:1.7; color:#d6d6d6; max-width:62ch}
   #deposit p b{color:#fff}
-  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:3vw; margin-top:5vh}
-  .steps div{border:1px solid var(--line); padding:26px 22px}
-  .steps b{display:block; font-family:'Press Start 2P','Source Code Pro',monospace; color:var(--brand); font-size:18px; margin-bottom:16px}
-  .steps span{font-size:14px; line-height:1.6; color:#c9c9c9}
 
   /* ---------- анкета ---------- */
   #form{background:#050505}
@@ -227,7 +230,6 @@ fbq('track', 'PageView');
     section{padding:10vh 7vw}
     .speaker{grid-template-columns:1fr; gap:30px}
     .fit{grid-template-columns:1fr; gap:40px}
-    .steps{grid-template-columns:1fr}
     .hero .cta{width:100%}
   }
 </style>
@@ -241,7 +243,7 @@ fbq('track', 'PageView');
 <!-- ===================== HERO ===================== -->
 <section class="hero" style="border-top:none">
   <video class="bgvid" src="assets/aivideo-hero.mp4" autoplay muted loop playsinline></video>
-  <p class="label">Бесплатный мастер-класс · Астана · Nazarbayev University</p>
+  <p class="label">Астана · Nazarbayev University</p>
   <h1 class="px">Зарабатывай от <span class="accent">500&nbsp;000&nbsp;₸</span> в&nbsp;месяц, создавая AI-контент</h1>
   <p class="when">6 сентября, воскресенье · 16:00–18:00</p>
   <a class="cta" href="#form" onclick="try{fbq('track','InitiateCheckout')}catch(e){}">Занять место</a>
@@ -249,7 +251,8 @@ fbq('track', 'PageView');
 </section>
 
 <!-- ===================== ЧТО БУДЕТ ===================== -->
-<section>
+<section class="prog">
+  <video class="bgvid" src="assets/mk-bg.mp4" autoplay muted loop playsinline></video>
   <div class="wrap fade">
     <p class="label" style="margin-bottom:26px">Программа</p>
     <h2 class="px">Что ты унесёшь с&nbsp;мастер-класса</h2>
@@ -298,15 +301,9 @@ fbq('track', 'PageView');
 </section>
 
 <!-- ===================== ДЕПОЗИТ ===================== -->
-<section id="deposit">
+<section id="deposit" style="padding:7vh 6vw">
   <div class="wrap fade">
-    <p>Мастер-класс <b>полностью бесплатный</b>. Но мест мало, а «записался и не пришёл» отнимает место у того, кто реально хотел попасть.</p>
-    <p>Поэтому место бронируется возвратным депозитом <b>5 000 ₸</b>. Пришёл — <b>получил депозит обратно на входе</b>, целиком.</p>
-    <div class="steps">
-      <div><b>01</b><span>Заполняешь анкету ниже — мы связываемся в WhatsApp</span></div>
-      <div><b>02</b><span>Вносишь депозит 5 000 ₸ — место закреплено за тобой</span></div>
-      <div><b>03</b><span>Приходишь на МК — забираешь 5 000 ₸ на входе</span></div>
-    </div>
+    <p>МК <b>бесплатный</b>. Мест мало, поэтому место бронируется возвратным депозитом <b>5 000 ₸</b> — пришёл и забрал его на входе целиком.</p>
   </div>
 </section>
 
