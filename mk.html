@@ -423,7 +423,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   });
 
   /* ===== НАСТРОЙКИ ФОРМЫ ===== */
-  const FORM_ENDPOINT = '';              /* опционально: Formspree/скрипт — 'https://formspree.io/f/XXXX' */
+  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzlB4g04bvtyeG6lDu6GpvPUOH1ePFEvXt2DCKKt1an5krF3m2z7thNR3r0xlT7j-wuxw/exec';  /* Google Таблица */
 
   document.getElementById('mkForm').addEventListener('submit', async e=>{
     e.preventDefault();
@@ -432,7 +432,13 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
     const depositYes = /Да/.test(d.deposit || '');
 
     if (FORM_ENDPOINT){
-      try{ await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:f}); }catch(err){}
+      try{
+        await fetch(FORM_ENDPOINT, {
+          method:'POST', mode:'no-cors',
+          headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:new URLSearchParams(d)
+        });
+      }catch(err){}
     }
 
     /* текст заявки передаём на mk-thanks.html — WhatsApp человек открывает кнопкой уже там
