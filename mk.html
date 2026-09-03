@@ -432,12 +432,13 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
     const depositYes = /Да/.test(d.deposit || '');
 
     if (FORM_ENDPOINT){
+      /* в фоне, без ожидания ответа — редирект не тормозит; sendBeacon доживает после ухода со страницы */
       try{
-        await fetch(FORM_ENDPOINT, {
-          method:'POST', mode:'no-cors',
-          headers:{'Content-Type':'application/x-www-form-urlencoded'},
-          body:new URLSearchParams(d)
-        });
+        const body = new URLSearchParams(d);
+        if (!(navigator.sendBeacon && navigator.sendBeacon(FORM_ENDPOINT, body))){
+          fetch(FORM_ENDPOINT, {method:'POST', mode:'no-cors', keepalive:true,
+            headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:body});
+        }
       }catch(err){}
     }
 
