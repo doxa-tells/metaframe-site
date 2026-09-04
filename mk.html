@@ -317,8 +317,8 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
     <h2 class="px">Займи своё место</h2>
 
     <div class="steps-head">
-      <p class="steps-count">Шаг <b id="stepNow">1</b> из 3 · меньше минуты</p>
-      <div class="steps-dots" id="stepDots"><i class="on"></i><i></i><i></i></div>
+      <p class="steps-count">Шаг <b id="stepNow">1</b> из 5 · меньше минуты</p>
+      <div class="steps-dots" id="stepDots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
     </div>
 
     <form id="mkForm">
@@ -335,14 +335,14 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
         <div class="step-nav">
           <button class="cta" type="button" data-next>Далее</button>
         </div>
-        <p class="steps-hint">Осталось два коротких шага</p>
+        <p class="steps-hint">Дальше — быстрые вопросы в один клик</p>
       </div>
 
-      <!-- ШАГ 2: о тебе -->
+      <!-- ШАГ 2: занятие -->
       <div class="step">
         <div class="field">
-          <label class="q" for="fWork">Чем занимаешься</label>
-          <select id="fWork" name="work">
+          <label class="q" for="fWork">Чем занимаешься <em>*</em></label>
+          <select id="fWork" name="work" required>
             <option value="" selected disabled>ВЫБЕРИ ВАРИАНТ</option>
             <option>SMM / маркетинг</option>
             <option>Дизайн / креатив</option>
@@ -351,8 +351,17 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
             <option>Другое</option>
           </select>
         </div>
+        <div class="step-nav">
+          <button class="back-btn" type="button" data-back>&larr; Назад</button>
+          <button class="cta" type="button" data-next>Далее</button>
+        </div>
+        <p class="steps-hint">Ещё три коротких шага</p>
+      </div>
+
+      <!-- ШАГ 3: опыт -->
+      <div class="step">
         <div class="field">
-          <label class="q">Опыт с нейросетями</label>
+          <label class="q">Опыт с нейросетями <em>*</em></label>
           <div class="radios">
             <label><input type="radio" name="exp" value="Не пробовал(а)" required> Ещё не пробовал(а)</label>
             <label><input type="radio" name="exp" value="Пробовал(а) пару раз"> Пробовал(а) пару раз</label>
@@ -363,15 +372,24 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
           <button class="back-btn" type="button" data-back>&larr; Назад</button>
           <button class="cta" type="button" data-next>Далее</button>
         </div>
+        <p class="steps-hint">Ещё два шага</p>
+      </div>
+
+      <!-- ШАГ 4: цель -->
+      <div class="step">
+        <div class="field">
+          <label class="q" for="fGoal">Зачем идёшь на МК? Одним предложением <em>*</em></label>
+          <textarea id="fGoal" name="goal" placeholder="НАПРИМЕР: ХОЧУ ДЕЛАТЬ РОЛИКИ ДЛЯ СВОЕГО МАГАЗИНА" required></textarea>
+        </div>
+        <div class="step-nav">
+          <button class="back-btn" type="button" data-back>&larr; Назад</button>
+          <button class="cta" type="button" data-next>Далее</button>
+        </div>
         <p class="steps-hint">Остался последний шаг</p>
       </div>
 
-      <!-- ШАГ 3: цель и депозит -->
+      <!-- ШАГ 5: депозит -->
       <div class="step">
-        <div class="field">
-          <label class="q" for="fGoal">Зачем идёшь на МК? Одним предложением</label>
-          <textarea id="fGoal" name="goal" placeholder="НАПРИМЕР: ХОЧУ ДЕЛАТЬ РОЛИКИ ДЛЯ СВОЕГО МАГАЗИНА"></textarea>
-        </div>
         <div class="field">
           <label class="q">МК бесплатный. Готов(а) внести возвратный депозит 5 000 ₸, чтобы закрепить место? <em>*</em></label>
           <div class="radios">
