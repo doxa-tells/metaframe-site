@@ -16,11 +16,12 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1059782113326849');
 fbq('track', 'PageView');
 
-/* конверсия — ровно один раз (защита от повторного срабатывания при обновлении) */
+/* конверсия — ровно один раз, и ТОЛЬКО для готовых оплатить (?d=1);
+   кто ответил «нет» — лидом не считается */
 try{
-  if (!sessionStorage.getItem('mk_lead_fired')){
+  if (!sessionStorage.getItem('mk_lead_fired') && new URLSearchParams(location.search).get('d') === '1'){
     fbq('track','Lead');
-    if (new URLSearchParams(location.search).get('d') === '1') fbq('track','CompleteRegistration');
+    fbq('track','CompleteRegistration');
     sessionStorage.setItem('mk_lead_fired','1');
   }
 }catch(e){}
@@ -79,7 +80,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   <img class="logo" src="assets/logo.png" alt="MetaFrame">
   <p class="label">Мастер-класс по AI-контенту</p>
   <h1>Анкета отправлена</h1>
-  <p class="sub">Остался один шаг: жми кнопку — откроется WhatsApp с готовой заявкой, просто отправь сообщение. Мы ответим с деталями: дата, время и реквизиты для депозита. Место закрепим после депозита — его вернём на входе.</p>
+  <p class="sub">Остался один шаг: жми кнопку — откроется WhatsApp с готовой заявкой, просто отправь сообщение. Мы ответим с деталями: дата, время и реквизиты для оплаты. Место закрепим после оплаты.</p>
   <a class="cta" id="waBtn" href="#" target="_blank" rel="noopener">Отправить заявку в WhatsApp</a>
   <a class="home" href="index.html">&larr; На главную METAFRAME</a>
 

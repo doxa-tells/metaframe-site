@@ -250,7 +250,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   <h1 class="px">Зарабатывай от <span class="accent">500&nbsp;000&nbsp;₸</span> в&nbsp;месяц, создавая AI-контент</h1>
   <p class="when">4 октября, воскресенье · 16:00–18:00</p>
   <a class="cta" href="#form" onclick="try{fbq('track','InitiateCheckout')}catch(e){}">Занять место</a>
-  <p class="seats">Осталось <b>10 мест</b> · Участие бесплатное</p>
+  <p class="seats">Осталось <b>10 мест</b> · Участие — <b>9 900 ₸</b></p>
 </section>
 
 <!-- ===================== ЧТО БУДЕТ ===================== -->
@@ -306,7 +306,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
 <!-- ===================== ДЕПОЗИТ ===================== -->
 <section id="deposit" style="padding:7vh 6vw">
   <div class="wrap fade">
-    <p>МК <b>бесплатный</b>. Мест мало, поэтому место бронируется возвратным депозитом <b>5 000 ₸</b> — пришёл и забрал его на входе целиком.</p>
+    <p>Участие — <b>9 900 ₸</b>. Мест мало: место закрепляется после оплаты, реквизиты скинем в WhatsApp.</p>
   </div>
 </section>
 
@@ -391,9 +391,9 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
       <!-- ШАГ 5: депозит -->
       <div class="step">
         <div class="field">
-          <label class="q">МК бесплатный. Готов(а) внести возвратный депозит 5 000 ₸, чтобы закрепить место? <em>*</em></label>
+          <label class="q">Участие стоит 9 900 ₸. Готов(а) оплатить, чтобы закрепить место? <em>*</em></label>
           <div class="radios">
-            <label><input type="radio" name="deposit" value="Да, готов(а)" required> Да, готов(а) — верну на входе</label>
+            <label><input type="radio" name="deposit" value="Да, готов(а) оплатить" required> Да, готов(а) оплатить</label>
             <label><input type="radio" name="deposit" value="Нет"> Нет, не готов(а)</label>
           </div>
         </div>
@@ -401,7 +401,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
           <button class="back-btn" type="button" data-back>&larr; Назад</button>
           <button class="cta" type="submit">Отправить анкету</button>
         </div>
-        <p class="fineprint">Нажимая кнопку, ты соглашаешься на обработку данных. После отправки мы напишем тебе в WhatsApp с деталями: дата, время, реквизиты для депозита.</p>
+        <p class="fineprint">Нажимая кнопку, ты соглашаешься на обработку данных. После отправки мы напишем тебе в WhatsApp с деталями: дата, время, реквизиты для оплаты.</p>
       </div>
     </form>
 
@@ -469,7 +469,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
       'Занятие: ' + (d.work||'—') + '\n' +
       'Опыт с ИИ: ' + (d.exp||'—') + '\n' +
       'Цель: ' + (d.goal||'—') + '\n' +
-      'Депозит 5000₸: ' + (d.deposit||'—');
+      'Оплата 9900₸: ' + (d.deposit||'—');
     try{ sessionStorage.setItem('mk_wa_msg', txt); }catch(err){}
 
     /* конверсия срабатывает на mk-thanks.html; ?d=1 = готов к депозиту */
