@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>БЕРКЕ ХАН — коммерческое предложение | METAFRAME</title>
+<style>
+  @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
+  :root{--gold:#C9A227; --gold2:#E8C96A; --ink:#0A0908; --line:#2a2520; --cy:#00FCFF;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink); color:#EDE6D8; font-family:Georgia,'Times New Roman',serif; line-height:1.65;}
+  .mono{font-family:'Source Code Pro',monospace}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 6vw}
+  section{padding:11vh 0; border-top:1px solid var(--line)}
+  .label{font-family:'Source Code Pro',monospace; color:var(--gold); font-size:12.5px; letter-spacing:.3em; text-transform:uppercase; margin-bottom:28px; font-weight:600}
+  h2{font-size:clamp(28px,3.4vw,44px); font-weight:400; letter-spacing:.01em; margin-bottom:30px; color:#F5EFE2}
+  p.body{font-size:clamp(16px,1.25vw,19px); color:#CFC6B4; max-width:72ch; margin-bottom:18px}
+  b{color:#F5EFE2; font-weight:600}
+  .gold{color:var(--gold2)}
+
+  /* hero */
+  .hero{min-height:100svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:12vh 6vw; position:relative; overflow:hidden; border:none;
+    background:
+      linear-gradient(180deg, rgba(10,9,8,.55) 0%, rgba(10,9,8,.35) 45%, rgba(10,9,8,.88) 88%, #0A0908 100%),
+      url('assets/berke-hero.jpg') center 28% / cover no-repeat,
+      radial-gradient(ellipse 80% 55% at 50% 118%, rgba(201,162,39,.32), transparent 60%),
+      #0A0908;}
+  .hero::after{content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E"); pointer-events:none}
+  .hero .kicker{font-family:'Source Code Pro',monospace; color:var(--gold); letter-spacing:.34em; font-size:13px; text-transform:uppercase; margin-bottom:34px; font-weight:600}
+  h1{font-size:clamp(54px,11vw,150px); font-weight:400; letter-spacing:.06em; line-height:1.02; color:#F5EFE2; text-transform:uppercase}
+  h1 span{display:block; font-size:clamp(20px,2.6vw,34px); letter-spacing:.5em; color:var(--gold2); margin-top:18px}
+  .hero .log{max-width:62ch; margin-top:40px; font-style:italic; color:#CFC6B4; font-size:clamp(16px,1.4vw,20px)}
+  .hero .facts{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:48px}
+  .fact{font-family:'Source Code Pro',monospace; font-size:13px; letter-spacing:.16em; text-transform:uppercase; border:1px solid var(--gold); color:var(--gold2); padding:12px 22px; border-radius:2px}
+  .hero .kp{position:absolute; top:30px; left:0; right:0; display:flex; justify-content:space-between; padding:0 6vw; font-family:'Source Code Pro',monospace; font-size:12px; letter-spacing:.22em; color:#8a8172; text-transform:uppercase}
+  .hero .kp b{color:var(--cy); font-weight:700}
+
+  /* сравнение */
+  .vs{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:34px}
+  .vs > div{border:1px solid var(--line); padding:34px 30px; border-radius:2px}
+  .vs .ai{border-color:var(--gold); background:rgba(201,162,39,.05)}
+  .vs h3{font-family:'Source Code Pro',monospace; font-size:13px; letter-spacing:.24em; text-transform:uppercase; margin-bottom:22px; color:#8a8172}
+  .vs .ai h3{color:var(--gold)}
+  .vs .num{font-size:clamp(30px,3.4vw,46px); color:#F5EFE2; margin-bottom:6px}
+  .vs .ai .num{color:var(--gold2)}
+  .vs small{display:block; font-family:'Source Code Pro',monospace; font-size:12.5px; letter-spacing:.08em; color:#8a8172; margin-bottom:20px}
+
+  /* смета */
+  table{width:100%; border-collapse:collapse; margin-top:10px; font-family:'Source Code Pro',monospace}
+  th{font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#8a8172; text-align:left; padding:14px 12px; border-bottom:1px solid var(--gold); font-weight:600}
+  th:last-child, td:last-child{text-align:right; white-space:nowrap}
+  td{padding:15px 12px; border-bottom:1px solid var(--line); font-size:14.5px; color:#DDD4C2; vertical-align:top}
+  td small{color:#8a8172; display:block; font-size:12.5px; margin-top:4px; letter-spacing:.02em}
+  tr.sub td{color:var(--gold); font-size:12px; letter-spacing:.24em; text-transform:uppercase; padding-top:30px; border-bottom:1px solid var(--gold); font-weight:600}
+  tr.total td{border-bottom:none; border-top:2px solid var(--gold); font-size:17px; color:#F5EFE2; font-weight:700; padding-top:20px}
+  .note{font-family:'Source Code Pro',monospace; font-size:12.5px; color:#8a8172; margin-top:22px; letter-spacing:.03em; line-height:1.8}
+
+  /* команда */
+  .team{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:22px; margin-top:10px}
+  .tcard{border:1px solid var(--line); padding:30px 28px; border-radius:2px}
+  .tcard .role{font-family:'Source Code Pro',monospace; color:var(--gold); font-size:12px; letter-spacing:.22em; text-transform:uppercase; margin-bottom:14px; font-weight:600}
+  .tcard h4{font-size:21px; font-weight:400; color:#F5EFE2; margin-bottom:12px}
+  .tcard p{font-size:15px; color:#BFB6A2}
+
+  /* пайплайн */
+  .steps{counter-reset:s; margin-top:8px}
+  .step{display:grid; grid-template-columns:72px 1fr; gap:18px; padding:26px 0; border-bottom:1px solid var(--line)}
+  .step:last-child{border:none}
+  .step::before{counter-increment:s; content:'0' counter(s); font-family:'Source Code Pro',monospace; color:var(--gold); font-size:26px}
+  .step h4{font-size:19px; color:#F5EFE2; font-weight:600; margin-bottom:6px}
+  .step p{color:#BFB6A2; font-size:15px}
+  .step .dur{font-family:'Source Code Pro',monospace; color:#8a8172; font-size:12.5px; letter-spacing:.14em; margin-top:8px; text-transform:uppercase}
+
+  /* регалии */
+  .reg{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; margin-top:8px}
+  .rcard{border:1px solid var(--line); padding:28px 26px; text-align:center; border-radius:2px}
+  .rcard .big{font-size:19px; color:var(--gold2); margin-bottom:10px}
+  .rcard p{font-family:'Source Code Pro',monospace; font-size:12.5px; color:#8a8172; letter-spacing:.06em}
+  .clients{margin-top:34px; font-family:'Source Code Pro',monospace; font-size:13.5px; letter-spacing:.1em; color:#8a8172; line-height:2.2}
+
+  /* футер */
+  footer{border-top:1px solid var(--line); padding:9vh 0; text-align:center}
+  footer .mf{font-family:'Source Code Pro',monospace; color:var(--cy); letter-spacing:.3em; font-size:15px; font-weight:700; margin-bottom:16px}
+  footer p{font-family:'Source Code Pro',monospace; font-size:13px; color:#8a8172; letter-spacing:.06em}
+  footer a{color:var(--gold2); text-decoration:none}
+
+  @media(max-width:760px){ .vs{grid-template-columns:1fr} td small{font-size:11.5px} th,td{padding:12px 6px; font-size:13px} }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kp"><span><b>METAFRAME</b> · AI-KINO</span><span>Коммерческое предложение</span></div>
+  <p class="kicker">Первый казахстанский полнометражный ИИ-анимационный фильм</p>
+  <h1>Берке хан<span>Хранитель улуса</span></h1>
+  <p class="log">Когда потомки Чингисхана начинают войну за власть, Берке, сын Джучи, встаёт перед выбором: подчиниться воле могущественных родственников — или выступить против собственной крови, чтобы спасти государство своего отца.</p>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="label">О проекте</p>
+    <h2>История человека, который не стремился к престолу — и спас государство</h2>
+    <p class="body">1263 год. Берега Терека усеяны телами воинов, ещё недавно сражавшихся под знаменем единой империи. Победитель, Берке, склоняется над раненым противником и протягивает ему воду: «Передо мной прежде всего родственник».</p>
+    <p class="body">Сын Джучи и хорезмийской царевны, Берке растёт между двумя мирами — традициями Чингисхана и исламской верой матери. Через заговоры, предательства и кризис престолонаследия он приходит к войне, которой не хотел, — и к битве на Тереке, где военной хитростью, вдохновлённой подвигами отца, разбивает армию Хулагу.</p>
+    <p class="body"><b>Это история о цене власти и о человеке, заложившем основы самостоятельности Золотой Орды</b> — рассказанная языком современной анимации для поколения, которое не читает учебники, но смотрит кино.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="label">Стилистический референс</p>
+    <h2>Уровень «Kök Börü» — на казахском материале</h2>
+    <p class="body">Ориентир проекта — короткометражный фильм <b>«Kök Börü»</b> студии Higgsfield: гибрид рисованной 2D-анимации и генеративного ИИ, премьера на <b>SIGGRAPH 2026</b>. 15 минут фильма команда из 12 человек произвела за 2 недели — это новый стандарт скорости и стоимости анимационного производства.</p>
+    <p class="body">Наша команда знает этот пайплайн не по статьям: <b>креативный продюсер проекта работал генеративным директором Higgsfield</b> в период создания этой технологии.</p>
+    <div class="vs">
+      <div>
+        <h3>Классическое 2D-производство</h3>
+        <div class="num">150–400 млн ₸</div>
+        <small>бюджет 50-минутного фильма</small>
+        <div class="num">18–30 мес</div>
+        <small>срок производства · команда 40–80 человек</small>
+      </div>
+      <div class="ai">
+        <h3>Пайплайн METAFRAME · AI</h3>
+        <div class="num">≈ 23,5 млн ₸</div>
+        <small>полный бюджет под ключ</small>
+        <div class="num">6 мес</div>
+        <small>срок производства · команда 7 человек</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="label">Ориентировочная смета</p>
+    <h2>23,5 млн ₸ под ключ</h2>
+    <table>
+      <tr><th>Статья</th><th>Расчёт</th><th>Сумма, ₸</th></tr>
+      <tr class="sub"><td colspan="3">Генерации и технологии</td></tr>
+      <tr><td>Видеогенерации — Seedance 2.5<small>50 мин ≈ 700 планов · клипы 8 сек в 1080p · коэффициент дублей ×6 ≈ 4 200 генераций ≈ 420 000 кредитов платформы</small></td><td>$5 500–6 500</td><td>3 200 000</td></tr>
+      <tr><td>Кейфреймы, персонажи, стиль-кадры<small>image-модели: консистентность героев, локации, пропс</small></td><td></td><td>400 000</td></tr>
+      <tr><td>Апскейл, интерполяция, клинап<small>Topaz / DaVinci, рендер-мощности</small></td><td></td><td>300 000</td></tr>
+      <tr class="sub"><td colspan="3">Команда · 6 месяцев производства</td></tr>
+      <tr><td>AI Creators × 2<small>промт-режиссура, генерации, консистентность персонажей</small></td><td>600 000 ₸/мес × 5 мес × 2</td><td>6 000 000</td></tr>
+      <tr><td>Сценарист-драматург<small>полнометражный сценарий, диалоги, историческая драматургия</small></td><td>фикс за проект</td><td>2 500 000</td></tr>
+      <tr><td>Режиссёр монтажа<small>ритм, сюжетная линия, сборка, темпоритм батальных сцен</small></td><td>700 000 ₸/мес × 4 мес</td><td>2 800 000</td></tr>
+      <tr><td>Художник-постановщик / раскадровка<small>2D-стиль фильма, раскадровка 700 планов</small></td><td>500 000 ₸/мес × 3 мес</td><td>1 500 000</td></tr>
+      <tr><td>Исторический консультант<small>XIII век, улус Джучи, костюм, оружие, этикет</small></td><td>фикс</td><td>400 000</td></tr>
+      <tr class="sub"><td colspan="3">Звук и финализация</td></tr>
+      <tr><td>Музыка и саунд-дизайн<small>оригинальный скор, этнические инструменты, фоли</small></td><td></td><td>2 000 000</td></tr>
+      <tr><td>Озвучание<small>8 актёров дубляжа, студия, режиссёр озвучания</small></td><td>одна языковая версия</td><td>1 500 000</td></tr>
+      <tr><td>Цветокоррекция, мастеринг, DCP</td><td></td><td>800 000</td></tr>
+      <tr><td>Резерв проекта</td><td>10%</td><td>2 100 000</td></tr>
+      <tr class="total"><td>Итого</td><td></td><td>≈ 23 500 000 ₸</td></tr>
+    </table>
+    <p class="note">Смета ориентировочная; курс 1 $ ≈ 540 ₸. Расчёт генераций — по тарифам Seedance 2.5 на платформе Higgsfield (8-сек клип 720p ≈ 52 кредита, 1080p ≈ ×2) с производственным коэффициентом дублей. Вторая языковая версия озвучания — +1,2 млн ₸. Промо-кампания и фестивальное продвижение — отдельным этапом по согласованию.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="label">Команда</p>
+    <h2>7 человек вместо 70</h2>
+    <div class="team">
+      <div class="tcard">
+        <div class="role">Креативный продюсер · AI-режиссура</div>
+        <h4>Дархан Телманов</h4>
+        <p>ex. Generative Director — Higgsfield. Победитель Higgsfield World Championship 2025 (5 000+ участников). Top-1 AI Creator Астаны. Отвечает за визуальный язык фильма и генеративный пайплайн.</p>
+      </div>
+      <div class="tcard">
+        <div class="role">Сценарист-драматург</div>
+        <h4>Приглашённый автор уровня топ-проката</h4>
+        <p>Ведём переговоры с авторами казахстанских фильмов-миллиардников и историческими драматургами. Задача — драматургически точная история Берке: конфликт крови и веры, цена власти.</p>
+      </div>
+      <div class="tcard">
+        <div class="role">Режиссёр монтажа</div>
+        <h4>Монтаж полного метра</h4>
+        <p>Монтажёр с опытом исторического кино и экшна: темпоритм батальных сцен, параллельный монтаж линий Берке и Хулагу, работа с хронологией «детство — война».</p>
+      </div>
+      <div class="tcard">
+        <div class="role">AI Creators × 2</div>
+        <h4>Топ генеративного комьюнити КЗ</h4>
+        <p>Отобраны из финалистов Case Championship и комьюнити Higgsfield: консистентность персонажей на 700 планах, промт-режиссура, массовые батальные сцены.</p>
+      </div>
+      <div class="tcard">
+        <div class="role">Художник-постановщик</div>
+        <h4>2D-стиль и раскадровка</h4>
+        <p>Художник из комикс- и анимационной среды: единый графический стиль фильма, раскадровка, ключевые кадры для генераций.</p>
+      </div>
+      <div class="tcard">
+        <div class="role">Исторический консультант</div>
+        <h4>Эпоха Золотой Орды</h4>
+        <p>Историк-медиевист: достоверность костюма, вооружения, придворного этикета и военного дела XIII века.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="label">Производство</p>
+    <h2>6 месяцев от сценария до DCP</h2>
+    <div class="steps">
+      <div class="step"><div><h4>Сценарий и драматургия</h4><p>Полнометражный сценарий по синопсису графического романа, поэпизодный план, диалоги.</p><p class="dur">Месяцы 1–2</p></div></div>
+      <div class="step"><div><h4>Стиль и раскадровка</h4><p>Визуальный язык фильма, дизайн персонажей, раскадровка 700 планов, аниматик.</p><p class="dur">Месяцы 2–3</p></div></div>
+      <div class="step"><div><h4>Генерация</h4><p>Производство планов на Seedance 2.5: персонажные сцены, батальные эпизоды, консистентность героев.</p><p class="dur">Месяцы 3–5</p></div></div>
+      <div class="step"><div><h4>Монтаж и звук</h4><p>Сборка, музыка, саунд-дизайн, озвучание, цветокоррекция, мастеринг DCP.</p><p class="dur">Месяцы 5–6</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="label">Почему METAFRAME</p>
+    <h2>Регалии студии</h2>
+    <div class="reg">
+      <div class="rcard"><div class="big">Winner</div><p>HIGGSFIELD WORLD CHAMPIONSHIP 2025 · СРЕДИ 5 000+ УЧАСТНИКОВ</p></div>
+      <div class="rcard"><div class="big">ex. Generative Director</div><p>HIGGSFIELD — ПЛАТФОРМА, СОЗДАВШАЯ «KÖK BÖRÜ»</p></div>
+      <div class="rcard"><div class="big">Top-1 AI Creator</div><p>АСТАНА · CASE CHAMPIONSHIP</p></div>
+      <div class="rcard"><div class="big">11 лет</div><p>В КИНО И РЕКЛАМЕ · 15+ ЛЕТ В IT-РАЗРАБОТКЕ</p></div>
+    </div>
+    <p class="clients">Нам доверяют: Kaspi Bank · Hyundai · Porsche · Mercedes-Benz · BI Group · Galmart · ХК «Барыс» · Астана ФК · МВД · МЧС · Министерство культуры · все казахстанские телеканалы</p>
+  </div>
+</section>
+
+<footer>
+  <p class="mf">METAFRAME</p>
+  <p>г. Астана, Nazarbayev University, офис 120, 128 · ЧК «Caster Limited»</p>
+  <p style="margin-top:10px"><a href="mailto:info@caster.kz">info@caster.kz</a> · <a href="https://metaframe.ltd">metaframe.ltd</a></p>
+</footer>
+
+</body>
+</html>
