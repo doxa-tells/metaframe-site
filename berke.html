@@ -32,11 +32,11 @@
   .hero::after{content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E"); pointer-events:none}
   .hero .kicker{font-family:'Source Code Pro',monospace; color:var(--gold); letter-spacing:.34em; font-size:13px; text-transform:uppercase; margin-bottom:34px; font-weight:600}
   h1{font-family:'Press Start 2P','Source Code Pro',monospace; word-spacing:-.45em; font-size:clamp(34px,7.4vw,96px); font-weight:400; line-height:1.1; color:#F5EFE2; text-transform:uppercase}
-  h1 span{display:block; font-size:clamp(13px,1.7vw,22px); letter-spacing:.1em; color:var(--gold2); margin-top:26px}
+  h1 span{display:block; font-size:clamp(13px,1.7vw,22px); letter-spacing:.14em; word-spacing:.6em; color:var(--gold2); margin-top:26px}
   .hero .log{max-width:64ch; margin-top:40px; color:#D8D0BE; font-size:clamp(15px,1.25vw,18px)}
   .hero .facts{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:48px}
   .fact{font-family:'Source Code Pro',monospace; font-size:13px; letter-spacing:.16em; text-transform:uppercase; border:1px solid var(--gold); color:var(--gold2); padding:12px 22px; border-radius:2px}
-  .hero .kp{position:absolute; top:30px; left:0; right:0; display:flex; justify-content:space-between; padding:0 6vw; font-family:'Source Code Pro',monospace; font-size:12px; letter-spacing:.22em; color:#8a8172; text-transform:uppercase}
+  .hero .kp{position:absolute; top:26px; align-items:center; left:0; right:0; display:flex; justify-content:space-between; padding:0 6vw; font-family:'Source Code Pro',monospace; font-size:12px; letter-spacing:.22em; color:#8a8172; text-transform:uppercase}
   .hero .kp b{color:var(--cy); font-weight:700}
 
   /* сравнение */
@@ -94,7 +94,7 @@
 <body>
 
 <div class="hero">
-  <div class="kp"><span><b>METAFRAME</b> · AI-KINO</span><span>Коммерческое предложение</span></div>
+  <div class="kp"><span style="display:flex;align-items:center;gap:14px"><img src="assets/logo.png" alt="MetaFrame" style="height:30px;display:block"> AI-KINO</span><span>Коммерческое предложение</span></div>
   <p class="kicker">Первый казахстанский полнометражный ИИ-анимационный фильм</p>
   <h1>Берке хан<span>Хранитель улуса</span></h1>
   <p class="log">Когда потомки Чингисхана начинают войну за власть, Берке, сын Джучи, встаёт перед выбором: подчиниться воле могущественных родственников — или выступить против собственной крови, чтобы спасти государство своего отца.</p>
@@ -192,7 +192,7 @@
       <tr class="sub"><td colspan="3">Генерации и технологии</td></tr>
       <tr><td>Видеогенерации — Seedance 2.5<small>хронометраж 50 мин ≈ 50 000 кредитов · препрод-коэффициент ×15 (450 сек генераций на 30 сек прода) ≈ 750 тыс. кредитов</small></td><td>$35 000–40 000</td><td>20 300 000</td></tr>
       <tr><td>Кейфреймы, персонажи, стиль-кадры<small>image-модели: консистентность героев, локации, пропс</small></td><td></td><td>700 000</td></tr>
-      <tr><td>Апскейл, интерполяция, клинап<small>Topaz / DaVinci, рендер-мощности</small></td><td></td><td>600 000</td></tr>
+      <tr><td>Апскейл до 4K и сервисные подписки<small>Topaz Video AI — апскейл и интерполяция · Magnific / Krea — детализация кадров · Runway — inpaint и клинап</small></td><td></td><td>600 000</td></tr>
       <tr class="sub"><td colspan="3">Команда · интенсив 2–3 месяца</td></tr>
       <tr><td>AI Creators × 2<small>промт-режиссура, генерации, консистентность персонажей — полная занятость</small></td><td>1 000 000 ₸/мес × 3 мес × 2</td><td>6 000 000</td></tr>
       <tr><td>Сценарист-драматург<small>автор уровня топ-проката: полнометражный сценарий, диалоги, историческая драматургия</small></td><td>фикс за проект</td><td>3 500 000</td></tr>
