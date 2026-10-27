@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ИИ для HoReCa — воркшоп MetaFrame × VELOR Academy</title>
+
+<!-- ===== META PIXEL (ID: 1059782113326849) ===== -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1059782113326849');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
+/></noscript>
+<!-- ===== /META PIXEL ===== -->
+
+<style>
+  @font-face{font-family:'Press Start 2P';src:url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+  @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
+  :root{
+    --brand:#00FCFF; --line:#242424;
+    /* пиксельно-закруглённые углы (в стиле шрифта) */
+    --px-clip: polygon(0 12px,4px 12px,4px 4px,12px 4px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 4px) calc(100% - 12px),calc(100% - 4px) calc(100% - 4px),calc(100% - 12px) calc(100% - 4px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 12px),0 calc(100% - 12px));
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:#000; color:#fff;
+    font-family:'Source Code Pro', monospace;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 34px;
+    mix-blend-mode:screen;
+  }
+  header img{height:40px; display:block}
+
+  .px{font-family:'Press Start 2P','Source Code Pro',monospace; word-spacing:-.45em; font-weight:700; text-transform:uppercase}
+  .label{color:var(--brand); font-size:12px; letter-spacing:.24em; text-transform:uppercase}
+  .cta{
+    display:inline-block;
+    background:var(--brand); color:#000;
+    text-decoration:none; text-align:center;
+    font-weight:800; text-transform:uppercase;
+    font-size:15px; letter-spacing:.1em;
+    padding:20px 38px;
+    clip-path:var(--px-clip);
+    transition:transform .15s ease, filter .2s;
+  }
+  .cta:hover{transform:translateY(-2px); filter:drop-shadow(0 8px 28px rgba(0,252,255,.45))}
+  .ghost{
+    display:inline-block;
+    border:1px solid var(--brand); color:var(--brand);
+    text-decoration:none; text-align:center;
+    font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+    padding:14px 24px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:15vh 6vw 10vh;
+    position:relative; overflow:hidden;
+  }
+  .hero .bgvid{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; z-index:0;
+  }
+  .hero::after{content:''; position:absolute; inset:0; background:rgba(0,0,0,.84); z-index:1}
+  .hero > *{position:relative; z-index:2}
+  .hero .label{margin-bottom:28px; font-weight:800; font-size:13px}
+  .hero h1{
+    font-size:clamp(19px, 2.4vw, 38px);
+    line-height:1.7; letter-spacing:-.01em;
+    max-width:28ch;
+  }
+  .hero h1 .accent{color:var(--brand)}
+  .hero .sub{
+    margin-top:28px;
+    font-size:clamp(15px,1.3vw,19px); line-height:1.65;
+    color:#d6d6d6; max-width:52ch;
+  }
+  .hero .sub b{color:#fff}
+  .hero .cta{margin-top:44px}
+  .when{
+    margin-top:30px;
+    font-size:clamp(13px,1.1vw,16px); letter-spacing:.22em;
+    color:#fff; text-transform:uppercase; font-weight:800;
+    border:1px solid #3a3a3a;
+    padding:12px 20px;
+  }
+  .seats{
+    margin-top:22px;
+    font-size:12.5px; letter-spacing:.22em; color:#c9c9c9; text-transform:uppercase; font-weight:700;
+  }
+  .seats b{color:var(--brand)}
+
+  /* ---------- секции ---------- */
+  section{padding:12vh 6vw; border-top:1px solid var(--line)}
+  .wrap{max-width:980px; margin:0 auto}
+
+  /* программа: видео-фон */
+  .prog{position:relative; overflow:hidden}
+  .prog .bgvid{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0}
+  .prog::after{content:''; position:absolute; inset:0; background:rgba(0,0,0,.78); z-index:1}
+  .prog .wrap{position:relative; z-index:2}
+  h2.px{font-size:clamp(20px,2.6vw,40px); line-height:1.5; margin-bottom:5vh}
+  h2 .accent{color:var(--brand)}
+
+  /* что будет */
+  .list{list-style:none}
+  .list li{
+    position:relative; padding-left:30px;
+    font-size:clamp(15px,1.2vw,18px); line-height:1.65; color:#d6d6d6;
+    margin-bottom:20px;
+  }
+  .list li::before{content:'—'; position:absolute; left:0; color:var(--brand)}
+  .list b{color:#fff}
+
+  /* спикер: текст поверх фото, низ затемнён */
+  .speaker{
+    position:relative;
+    min-height:92svh;
+    background:url('assets/founder-bg.jpg') 38% 20% / cover no-repeat;
+    display:flex; align-items:flex-end;
+  }
+  .speaker::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.4) 45%, rgba(0,0,0,.94) 88%);
+  }
+  .sp-inner{
+    position:relative; z-index:1;
+    width:100%; max-width:980px; margin:0 auto;
+    padding:0 6vw 7vh;
+  }
+  .speaker h2{margin-bottom:3vh}
+  .speaker .role{color:var(--brand); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:20px; line-height:1.9}
+  .speaker .role span{display:block; white-space:nowrap}   /* ровно 2 ряда, без переносов */
+  .speaker p{font-size:clamp(14px,1.1vw,17px); line-height:1.7; color:#d6d6d6; margin-bottom:14px}
+  .speaker p b{color:#fff}
+  .quote{
+    margin-top:26px; padding:22px 26px;
+    border-left:2px solid var(--brand);
+    background:#0a0a0a;
+    font-size:clamp(14px,1.1vw,17px); line-height:1.7; color:#eaeaea;
+  }
+
+  /* кому подойдет */
+  .fit{display:grid; grid-template-columns:1fr 1fr; gap:5vw}
+  .fit h3{font-size:13px; letter-spacing:.22em; text-transform:uppercase; margin-bottom:26px}
+  .fit .yes h3{color:var(--brand)}
+  .fit .no h3{color:#666}
+  .fit li{list-style:none; position:relative; padding-left:26px; font-size:clamp(14px,1.1vw,17px); line-height:1.6; color:#d6d6d6; margin-bottom:16px}
+  .fit .yes li::before{content:'+'; position:absolute; left:0; color:var(--brand)}
+  .fit .no li::before{content:'–'; position:absolute; left:0; color:#666}
+  .fit .no li{color:#8f8f8f}
+
+  /* депозит — короткая строка */
+  #deposit p{font-size:clamp(15px,1.2vw,18px); line-height:1.7; color:#d6d6d6; max-width:62ch}
+  #deposit p b{color:#fff}
+
+  /* ---------- анкета ---------- */
+  #form{background:#050505}
+  #form .wrap{max-width:640px}
+  form .field{margin-bottom:30px}
+  form label.q{
+    display:block; font-size:13px; letter-spacing:.18em; text-transform:uppercase;
+    color:#9a9a9a; margin-bottom:14px;
+  }
+  form label.q em{color:var(--brand); font-style:normal}
+  input[type=text], input[type=tel], input[type=email], select, textarea{
+    width:100%;
+    background:transparent; border:none; border-bottom:1px solid #333;
+    color:#fff; font-family:'Source Code Pro',monospace;
+    font-size:16px; letter-spacing:.06em;
+    padding:12px 2px; outline:none;
+    transition:border-color .25s;
+    border-radius:0;
+  }
+  select{appearance:none; -webkit-appearance:none; cursor:pointer}
+  select option{background:#0a0a0a; color:#fff}
+  textarea{resize:vertical; min-height:74px}
+  input:focus, select:focus, textarea:focus{border-color:var(--brand)}
+  input::placeholder, textarea::placeholder{color:#555; letter-spacing:.14em}
+  .radios{display:flex; flex-direction:column; gap:14px}
+  .radios label{
+    display:flex; align-items:flex-start; gap:14px;
+    border:1px solid #2a2a2a; padding:16px 18px;
+    font-size:15px; line-height:1.5; color:#d6d6d6;
+    cursor:pointer; transition:border-color .2s, background .2s;
+  }
+  .radios input{accent-color:var(--brand); margin-top:3px; flex:0 0 auto}
+  .radios label:has(input:checked){border-color:var(--brand); background:rgba(0,252,255,.05); color:#fff}
+
+  /* ---------- анкета по шагам ---------- */
+  .steps-head{display:flex; align-items:center; justify-content:space-between; gap:16px; margin:34px 0 30px}
+  .steps-count{font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:#8a8a8a}
+  .steps-count b{color:var(--brand); font-weight:700}
+  .steps-dots{display:flex; gap:8px}
+  .steps-dots i{width:38px; height:4px; background:#1e1e1e; transition:background .3s}
+  .steps-dots i.on{background:var(--brand)}
+  .step{display:none}
+  .step.on{display:block; animation:stepIn .35s ease}
+  @keyframes stepIn{from{opacity:0; transform:translateX(16px)} to{opacity:1; transform:none}}
+  .step-nav{display:flex; align-items:center; gap:18px; margin-top:6px}
+  .back-btn{
+    background:none; border:none; cursor:pointer;
+    font-family:'Source Code Pro',monospace; font-size:12px; letter-spacing:.2em;
+    color:#8a8a8a; text-transform:uppercase; padding:14px 0;
+  }
+  .back-btn:hover{color:#fff}
+  .steps-hint{font-size:12.5px; letter-spacing:.16em; color:#666; text-transform:uppercase; margin-top:10px}
+  button.cta{border:none; cursor:pointer; width:100%; font-family:'Source Code Pro',monospace}
+  .fineprint{margin-top:18px; font-size:12px; line-height:1.7; color:#777}
+
+  /* появление */
+  .fade{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease}
+  .fade.in{opacity:1; transform:none}
+
+  @media (max-width:760px){
+    header img{height:32px}
+    .speaker .role{font-size:2.6vw; letter-spacing:.12em}
+    section{padding:10vh 7vw}
+    .speaker{grid-template-columns:1fr; gap:30px}
+    .fit{grid-template-columns:1fr; gap:40px}
+    .hero .cta{width:100%}
+  }
+
+  /* промо-окно */
+  .promo-sec{padding:12vh 6vw; border-top:1px solid var(--line); text-align:center}
+  .promo-card{position:relative; max-width:860px; margin:0 auto; cursor:pointer; clip-path:var(--px-clip); display:block}
+  .promo-card img{width:100%; display:block; filter:brightness(.75)}
+  .promo-card .play{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px}
+  .promo-card .play .btn{width:92px; height:92px; border-radius:50%; border:2px solid var(--brand); background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; transition:transform .2s ease, background .2s}
+  .promo-card:hover .play .btn{transform:scale(1.08); background:rgba(0,252,255,.18)}
+  .promo-card .play .btn::after{content:''; border-style:solid; border-width:16px 0 16px 26px; border-color:transparent transparent transparent var(--brand); margin-left:6px}
+  .promo-card .play span{font-family:'Source Code Pro',monospace; font-size:13px; letter-spacing:.24em; text-transform:uppercase; color:#fff; font-weight:700; text-shadow:0 2px 14px rgba(0,0,0,.8)}
+  #promoModal{position:fixed; inset:0; z-index:70; background:rgba(0,0,0,.94); display:none; align-items:center; justify-content:center; padding:4vh 4vw}
+  #promoModal.open{display:flex}
+  #promoModal video{max-width:min(1100px,94vw); width:100%; max-height:86vh; outline:2px solid var(--brand)}
+  #promoModal .close{position:absolute; top:22px; right:30px; font-family:'Source Code Pro',monospace; font-size:36px; color:#fff; cursor:pointer; line-height:1}
+  #promoModal .close:hover{color:var(--brand)}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html"><img src="assets/logo.png" alt="METAFRAME"></a>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" style="border-top:none">
+  <video class="bgvid" src="assets/aivideo-hero.mp4" autoplay muted loop playsinline></video>
+  <p class="label">MetaFrame × VELOR Academy · Астана · офлайн-воркшоп</p>
+  <h1 class="px"><span class="accent">ИИ-контент</span> для отелей и ресторанов — силами вашей команды</h1>
+  <p class="sub" style="margin-top:24px;font-size:clamp(14px,1.2vw,18px);line-height:1.65;color:#d6d6d6;max-width:58ch">Воркшоп для маркетологов, SMM и PR индустрии гостеприимства: ролики и постеры вашего объекта — <b style="color:#fff">без съёмочной команды и подрядчиков</b>.</p>
+  <p class="when">4 часа воркшопа · практика на ваших объектах</p>
+  <a class="cta" href="#form" onclick="try{fbq('track','InitiateCheckout')}catch(e){}">Занять место</a>
+  <p class="seats">Участие — <b>100 000 ₸</b> · месяц Higgsfield + <b>1000 кредитов</b> включены</p>
+</section>
+
+
+<!-- ===================== PROMO ===================== -->
+<section class="promo-sec">
+  <p class="label" style="margin-bottom:26px">Коллаборация MetaFrame × VELOR Academy</p>
+  <h2 class="px" style="margin-bottom:5vh">Смотри <span class="accent">промо</span></h2>
+  <div class="promo-card" id="promoOpen">
+    <img src="assets/promo-poster.jpg" alt="Masterclass promo">
+    <div class="play"><div class="btn"></div><span>Смотреть со звуком · 1 мин</span></div>
+  </div>
+</section>
+
+<!-- ===================== PROGRAM ===================== -->
+<section class="prog">
+  <video class="bgvid" src="assets/mk-bg.mp4" autoplay muted loop playsinline></video>
+  <div class="wrap fade">
+    <p class="label" style="margin-bottom:26px">Программа воркшопа</p>
+    <h2 class="px">Что заберёт ваша команда</h2>
+    <ul class="list">
+      <li><b>Рекламный ролик отеля или ресторана из ваших фото</b> — номера, завтраки, залы оживают без съёмочной команды.</li>
+      <li><b>Промпт-инжиниринг</b> — системное обучение языку нейросетей, база, которая останется с командой.</li>
+      <li><b>Постеры и баннеры уровня дизайн-студии</b> — акции, сезонные офферы и меню за минуты, а не дни.</li>
+      <li><b>Контент-конвейер соцсетей силами одного человека</b> — ролики и визуал каждый день, без бюджета на продакшн.</li>
+      <li><b>Фишки и обходы нейросетей изнутри Higgsfield</b> — то, чего нет в туториалах на YouTube.</li>
+      <li><b>В стоимость входит месячная подписка Higgsfield и 1000 кредитов</b> — уходите с готовым рабочим инструментом.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== СПИКЕР ===================== -->
+<section style="padding:0">
+  <div class="speaker fade">
+    <div class="sp-inner">
+      <p class="label" style="margin-bottom:22px">Ведущий</p>
+      <h2 class="px" style="margin-bottom:2.5vh">Дархан Телманов</h2>
+      <p class="role"><span>ex. Generative Director — Higgsfield</span><span>Top-1 AI Creator в Астане · Основатель METAFRAME</span></p>
+      <p>Победитель <b>Higgsfield World Championship 2025</b> среди 5000+ участников. Среди клиентов — <b>Rixos, Kaspi Bank, Hyundai, Porsche, Mercedes-Benz</b> и национальные телеканалы.</p>
+      <div class="quote">«Я знаю эти нейросети изнутри. За 4 часа ваша команда начнёт делать контент, за который отель сейчас платит подрядчикам — своими руками и в разы быстрее.»</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== КОМУ ===================== -->
+<section>
+  <div class="wrap fade">
+    <h2 class="px">Кому подойдёт</h2>
+    <div class="fit">
+      <ul class="yes">
+        <h3>Вам — если вы</h3>
+        <li>Маркетолог или SMM отеля, ресторана, спа — ведёте соцсети и устали ждать подрядчиков</li>
+        <li>Управляющий или владелец — хотите, чтобы контент делала своя команда, а не агентство</li>
+        <li>PR или бренд-менеджер сети — нужен единый визуальный уровень по всем объектам</li>
+        <li>Готовы 4 часа делать руками на материале своего объекта</li>
+      </ul>
+      <ul class="no">
+        <h3>Не подойдёт — если</h3>
+        <li>Ждёте волшебную кнопку без практики</li>
+        <li>Не готовы выделить команде 4 часа полностью</li>
+        <li>Нет задач по контенту в гостеприимстве</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ДЕПОЗИТ ===================== -->
+<section id="deposit" style="padding:7vh 6vw">
+  <div class="wrap fade">
+    <p>Участие — <b>100 000 ₸</b> за человека. В стоимость входит <b>месячная подписка Higgsfield + 1000 кредитов</b> и обучение промпт-инжинирингу. Воркшоп проводится в коллаборации с <b>VELOR Academy</b> — первой академией гостеприимства швейцарского стандарта в Центральной Азии (<a href="https://velor.academy" style="color:var(--brand)">velor.academy</a>). Дату и площадку сообщим в WhatsApp после заявки. Группам от 3 человек — отдельные условия.</p>
+  </div>
+</section>
+
+<!-- ===================== BOOKING ===================== -->
+<section id="form">
+  <div class="wrap fade">
+    <p class="label" style="margin-bottom:26px">Заявка</p>
+    <h2 class="px">Запишите команду — <span class="accent">100 000 ₸</span></h2>
+    <form id="klForm" style="margin-top:34px">
+      <div class="field">
+        <label class="q" for="fName">Имя <em>*</em></label>
+        <input type="text" id="fName" name="name" placeholder="КАК К ВАМ ОБРАЩАТЬСЯ" required>
+      </div>
+      <div class="field">
+        <label class="q" for="fPhone">Телефон (WhatsApp) <em>*</em></label>
+        <input type="tel" id="fPhone" name="phone" placeholder="+7 ___ ___ __ __" required>
+      </div>
+      <div class="field">
+        <label class="q" for="fHotel">Отель / ресторан / компания <em>*</em></label>
+        <input type="text" id="fHotel" name="goal" placeholder="НАЗВАНИЕ ОБЪЕКТА" required>
+      </div>
+      <button class="cta" type="submit">Отправить заявку</button>
+      <p class="fineprint">После заявки напишем в WhatsApp: дата, площадка, счёт на оплату. Место закрепляется после оплаты. Нажимая кнопку, вы соглашаетесь на обработку данных.</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  /* появление секций */
+  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.15});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+
+  /* промо-модалка */
+  const pm = document.getElementById('promoModal'), pvid = document.getElementById('promoVid');
+  document.getElementById('promoOpen').addEventListener('click', ()=>{ pm.classList.add('open'); pvid.currentTime=0; pvid.muted=false; pvid.play(); });
+  function pmClose(){ pm.classList.remove('open'); pvid.pause(); }
+  document.getElementById('promoClose').addEventListener('click', pmClose);
+  pm.addEventListener('click', e=>{ if(e.target===pm) pmClose(); });
+  addEventListener('keydown', e=>{ if(e.key==='Escape') pmClose(); });
+
+  /* бронь: таблица + Telegram (тот же endpoint) + WhatsApp */
+  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwNR4grh628aZck-sJM4r7BCBAg0GbNJWL5Z-uAAWvgBDRQtjFgB1PJhQFYpxir7O-O/exec';
+  const WHATSAPP = '77068257763';
+  document.getElementById('klForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(e.target).entries());
+    d.work = 'HoReCa · Velor Academy'; d.exp = 'воркшоп 100k'; d.deposit = 'Да — HoReCa 100 000 ₸';
+    try{ fbq('track','Lead'); }catch(err){}
+    try{
+      const body = new URLSearchParams(d);
+      if (!(navigator.sendBeacon && navigator.sendBeacon(FORM_ENDPOINT, body))){
+        fetch(FORM_ENDPOINT,{method:'POST',mode:'no-cors',keepalive:true,
+          headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body});
+      }
+    }catch(err){}
+    const msg = encodeURIComponent('Заявка на HoReCa-воркшоп MetaFrame × VELOR Academy (100 000 ₸)\n' +
+      'Имя: ' + (d.name||'') + '\nТелефон: ' + (d.phone||'') + '\nОбъект: ' + (d.goal||'—'));
+    location.href = 'https://wa.me/' + WHATSAPP + '?text=' + msg;
+  });
+</script>
+
+<!-- промо-модалка -->
+<div id="promoModal">
+  <span class="close" id="promoClose">&times;</span>
+  <video id="promoVid" src="assets/promo-kl.mp4" controls playsinline></video>
+</div>
+</body>
+</html>
