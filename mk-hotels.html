@@ -266,7 +266,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   <p class="sub" style="margin-top:24px;font-size:clamp(14px,1.2vw,18px);line-height:1.65;color:#d6d6d6;max-width:58ch">Воркшоп для маркетологов, SMM и PR индустрии гостеприимства: ролики и постеры вашего объекта — <b style="color:#fff">без съёмочной команды и подрядчиков</b>.</p>
   <p class="when">4 часа воркшопа · практика на ваших объектах</p>
   <a class="cta" href="#form" onclick="try{fbq('track','InitiateCheckout')}catch(e){}">Занять место</a>
-  <p class="seats">Участие — <b>100 000 ₸</b> · месяц Higgsfield + <b>1000 кредитов</b> включены</p>
+  <p class="seats">Участие — <b>150 000 ₸</b> · месяц Higgsfield + <b>1000 кредитов</b> включены</p>
 </section>
 
 
@@ -335,7 +335,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
 <!-- ===================== ДЕПОЗИТ ===================== -->
 <section id="deposit" style="padding:7vh 6vw">
   <div class="wrap fade">
-    <p>Участие — <b>100 000 ₸</b> за человека. В стоимость входит <b>месячная подписка Higgsfield + 1000 кредитов</b> и обучение промпт-инжинирингу. Воркшоп проводится в коллаборации с <b>VELOR Academy</b> — первой академией гостеприимства швейцарского стандарта в Центральной Азии (<a href="https://velor.academy" style="color:var(--brand)">velor.academy</a>). Дату и площадку сообщим в WhatsApp после заявки. Группам от 3 человек — отдельные условия.</p>
+    <p>Участие — <b>150 000 ₸</b> за человека. В стоимость входит <b>месячная подписка Higgsfield + 1000 кредитов</b> и обучение промпт-инжинирингу. Воркшоп проводится в коллаборации с <b>VELOR Academy</b> — первой академией гостеприимства швейцарского стандарта в Центральной Азии (<a href="https://velor.academy" style="color:var(--brand)">velor.academy</a>). Дату и площадку сообщим в WhatsApp после заявки. Группам от 3 человек — отдельные условия.</p>
   </div>
 </section>
 
@@ -343,7 +343,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
 <section id="form">
   <div class="wrap fade">
     <p class="label" style="margin-bottom:26px">Заявка</p>
-    <h2 class="px">Запишите команду — <span class="accent">100 000 ₸</span></h2>
+    <h2 class="px">Запишите команду — <span class="accent">150 000 ₸</span></h2>
     <form id="klForm" style="margin-top:34px">
       <div class="field">
         <label class="q" for="fName">Имя <em>*</em></label>
@@ -382,7 +382,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   document.getElementById('klForm').addEventListener('submit', e=>{
     e.preventDefault();
     const d = Object.fromEntries(new FormData(e.target).entries());
-    d.work = 'HoReCa · Velor Academy'; d.exp = 'воркшоп 100k'; d.deposit = 'Да — HoReCa 100 000 ₸';
+    d.work = 'HoReCa · Velor Academy'; d.exp = 'воркшоп 150k'; d.deposit = 'Да — HoReCa 150 000 ₸';
     try{ fbq('track','Lead'); }catch(err){}
     try{
       const body = new URLSearchParams(d);
@@ -391,7 +391,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
           headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body});
       }
     }catch(err){}
-    const msg = encodeURIComponent('Заявка на HoReCa-воркшоп MetaFrame × VELOR Academy (100 000 ₸)\n' +
+    const msg = encodeURIComponent('Заявка на HoReCa-воркшоп MetaFrame × VELOR Academy (150 000 ₸)\n' +
       'Имя: ' + (d.name||'') + '\nТелефон: ' + (d.phone||'') + '\nОбъект: ' + (d.goal||'—'));
     location.href = 'https://wa.me/' + WHATSAPP + '?text=' + msg;
   });
