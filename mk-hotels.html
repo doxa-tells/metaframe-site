@@ -377,6 +377,12 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   </div>
 </section>
 
+<!-- промо-модалка -->
+<div id="promoModal">
+  <span class="close" id="promoClose">&times;</span>
+  <video id="promoVid" src="assets/promo-kl.mp4" controls playsinline></video>
+</div>
+
 <script>
   /* появление секций */
   const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.15});
@@ -410,11 +416,5 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
     location.href = 'https://wa.me/' + WHATSAPP + '?text=' + msg;
   });
 </script>
-
-<!-- промо-модалка -->
-<div id="promoModal">
-  <span class="close" id="promoClose">&times;</span>
-  <video id="promoVid" src="assets/promo-kl.mp4" controls playsinline></video>
-</div>
 </body>
 </html>
