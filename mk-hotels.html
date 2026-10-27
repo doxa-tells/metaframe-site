@@ -250,6 +250,22 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   #promoModal video{max-width:min(1100px,94vw); width:100%; max-height:86vh; outline:2px solid var(--brand)}
   #promoModal .close{position:absolute; top:22px; right:30px; font-family:'Source Code Pro',monospace; font-size:36px; color:#fff; cursor:pointer; line-height:1}
   #promoModal .close:hover{color:var(--brand)}
+
+  /* карточки-блоки */
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .card{background:var(--brand); clip-path:var(--px-clip); padding:2px}
+  .card>div{background:rgba(6,10,10,.88); clip-path:var(--px-clip); padding:26px 24px; height:100%}
+  .card h4{font-family:'Source Code Pro',monospace; font-size:15.5px; letter-spacing:.08em; color:var(--brand); margin-bottom:12px; font-weight:800; text-transform:uppercase}
+  .card p{font-size:14.5px; line-height:1.65; color:#d6d6d6}
+  .card.hl>div{background:var(--brand)}
+  .card.hl h4{color:#000}
+  .card.hl p{color:#063A3D; font-weight:600}
+  .card.dim{background:#333}
+  .card.dim h4{color:#9a9a9a}
+  .card.dim p{color:#8f8f8f}
+  .cards-label{margin:40px 0 18px}
+  @media(max-width:760px){.cards{grid-template-columns:1fr}}
+  .hgf{color:#BFEE0A !important}
 </style>
 </head>
 <body>
@@ -286,14 +302,14 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
   <div class="wrap fade">
     <p class="label" style="margin-bottom:26px">Программа воркшопа</p>
     <h2 class="px">Что заберёт ваша команда</h2>
-    <ul class="list">
-      <li><b>Рекламный ролик отеля или ресторана из ваших фото</b> — номера, завтраки, залы оживают без съёмочной команды.</li>
-      <li><b>Промпт-инжиниринг</b> — системное обучение языку нейросетей, база, которая останется с командой.</li>
-      <li><b>Постеры и баннеры уровня дизайн-студии</b> — акции, сезонные офферы и меню за минуты, а не дни.</li>
-      <li><b>Контент-конвейер соцсетей силами одного человека</b> — ролики и визуал каждый день, без бюджета на продакшн.</li>
-      <li><b>Фишки и обходы нейросетей изнутри Higgsfield</b> — то, чего нет в туториалах на YouTube.</li>
-      <li><b>В стоимость входит месячная подписка Higgsfield и 1000 кредитов</b> — уходите с готовым рабочим инструментом.</li>
-    </ul>
+    <div class="cards">
+      <div class="card"><div><h4>Ролик из ваших фото</h4><p>Рекламный ролик отеля или ресторана: номера, завтраки, залы оживают — без съёмочной команды и продакшна.</p></div></div>
+      <div class="card"><div><h4>Промпт-инжиниринг</h4><p>Системное обучение языку нейросетей. База, которая останется с командой навсегда.</p></div></div>
+      <div class="card"><div><h4>Постеры и баннеры</h4><p>Акции, сезонные офферы и меню уровня дизайн-студии — за минуты, а не дни.</p></div></div>
+      <div class="card"><div><h4>Контент-конвейер</h4><p>Ролики и визуал каждый день силами одного человека — без бюджета на подрядчиков.</p></div></div>
+      <div class="card"><div><h4>Фишки Higgsfield изнутри</h4><p>Лайфхаки и обходы нейросетей, которых нет в туториалах на YouTube.</p></div></div>
+      <div class="card hl"><div><h4>Месяц Higgsfield + 1000 кредитов</h4><p>Входят в стоимость. Команда уходит с готовым рабочим инструментом, а не с конспектом.</p></div></div>
+    </div>
   </div>
 </section>
 
@@ -303,7 +319,7 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
     <div class="sp-inner">
       <p class="label" style="margin-bottom:22px">Ведущий</p>
       <h2 class="px" style="margin-bottom:2.5vh">Дархан Телманов</h2>
-      <p class="role"><span>ex. Generative Director — Higgsfield</span><span>Top-1 AI Creator в Астане · Основатель METAFRAME</span></p>
+      <p class="role"><span class="hgf">ex. Generative Director — Higgsfield</span><span>Top-1 AI Creator в Астане · Основатель METAFRAME</span></p>
       <p>Победитель <b>Higgsfield World Championship 2025</b> среди 5000+ участников. Среди клиентов — <b>Rixos, Kaspi Bank, Hyundai, Porsche, Mercedes-Benz</b> и национальные телеканалы.</p>
       <div class="quote">«Я знаю эти нейросети изнутри. За 4 часа ваша команда начнёт делать контент, за который отель сейчас платит подрядчикам — своими руками и в разы быстрее.»</div>
     </div>
@@ -314,20 +330,18 @@ src="https://www.facebook.com/tr?id=1059782113326849&ev=PageView&noscript=1"
 <section>
   <div class="wrap fade">
     <h2 class="px">Кому подойдёт</h2>
-    <div class="fit">
-      <ul class="yes">
-        <h3>Вам — если вы</h3>
-        <li>Маркетолог или SMM отеля, ресторана, спа — ведёте соцсети и устали ждать подрядчиков</li>
-        <li>Управляющий или владелец — хотите, чтобы контент делала своя команда, а не агентство</li>
-        <li>PR или бренд-менеджер сети — нужен единый визуальный уровень по всем объектам</li>
-        <li>Готовы 4 часа делать руками на материале своего объекта</li>
-      </ul>
-      <ul class="no">
-        <h3>Не подойдёт — если</h3>
-        <li>Ждёте волшебную кнопку без практики</li>
-        <li>Не готовы выделить команде 4 часа полностью</li>
-        <li>Нет задач по контенту в гостеприимстве</li>
-      </ul>
+    <p class="label cards-label">Вам — если вы</p>
+    <div class="cards">
+      <div class="card"><div><h4>Маркетолог / SMM</h4><p>Ведёте соцсети отеля, ресторана или спа — и устали ждать подрядчиков по каждому макету.</p></div></div>
+      <div class="card"><div><h4>Управляющий / владелец</h4><p>Хотите, чтобы контент делала своя команда, а не агентство с ежемесячным счётом.</p></div></div>
+      <div class="card"><div><h4>PR / бренд-менеджер сети</h4><p>Нужен единый визуальный уровень по всем объектам — быстро и управляемо.</p></div></div>
+      <div class="card"><div><h4>Практик</h4><p>Готовы 4 часа делать руками на материале своего объекта, а не просто слушать.</p></div></div>
+    </div>
+    <p class="label cards-label" style="color:#8f8f8f">Не подойдёт — если</p>
+    <div class="cards">
+      <div class="card dim"><div><h4>Ждёте кнопку</h4><p>Волшебной кнопки без практики не будет — будет работа руками.</p></div></div>
+      <div class="card dim"><div><h4>Нет 4 часов</h4><p>Не готовы выделить команде один блок времени полностью.</p></div></div>
+      <div class="card dim"><div><h4>Не про HoReCa</h4><p>Нет задач по контенту в гостеприимстве — вам на общий мастер-класс.</p></div></div>
     </div>
   </div>
 </section>
