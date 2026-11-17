@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ТОО «V TRENDE» × METAFRAME — презентация компании</title>
+<style>
+  @font-face{font-family:'Press Start 2P';src:url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+  @font-face{font-family:'Source Code Pro';src:url('assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype-variations');font-weight:200 900;font-display:swap;}
+  :root{
+    --brand:#00FCFF; --line:#242424;
+    --px-clip: polygon(0 12px,4px 12px,4px 4px,12px 4px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 4px) calc(100% - 12px),calc(100% - 4px) calc(100% - 4px),calc(100% - 12px) calc(100% - 4px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 12px),0 calc(100% - 12px));
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#000; color:#fff; font-family:'Source Code Pro',monospace; -webkit-font-smoothing:antialiased}
+  .px{font-family:'Press Start 2P','Source Code Pro',monospace; word-spacing:-.45em; font-weight:700; text-transform:uppercase}
+  .label{color:var(--brand); font-size:12px; letter-spacing:.24em; text-transform:uppercase; font-weight:600}
+  header{position:fixed; inset:0 0 auto 0; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:20px 34px; mix-blend-mode:screen}
+  header img{height:40px; display:block}
+
+  .hero{min-height:92svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:14vh 6vw 8vh; position:relative; overflow:hidden;
+    background:
+      linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.86)),
+      url('assets/directions-bg.jpg') center / cover no-repeat #000;}
+  .hero .label{margin-bottom:26px}
+  .hero h1{font-size:clamp(26px,4.6vw,62px); line-height:1.25}
+  .hero h1 .accent{color:var(--brand)}
+  .hero .sub{margin-top:28px; font-size:clamp(14px,1.25vw,18px); line-height:1.7; color:#d6d6d6; max-width:64ch}
+  .hero .sub b{color:#fff}
+  .hero .facts{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:36px}
+  .fact{font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; border:1px solid var(--brand); color:var(--brand); padding:12px 20px}
+
+  section{padding:11vh 6vw; border-top:1px solid var(--line)}
+  .wrap{max-width:1020px; margin:0 auto}
+  h2.px{font-size:clamp(19px,2.5vw,36px); line-height:1.5; margin-bottom:5vh}
+  h2 .accent{color:var(--brand)}
+  p.body{font-size:clamp(14.5px,1.2vw,17px); line-height:1.75; color:#cfcfcf; max-width:74ch; margin-bottom:16px}
+  p.body b{color:#fff}
+
+  /* реквизиты */
+  .req{max-width:1020px; margin:-6vh auto 0; padding:26px 30px; border:1px solid var(--line); font-size:13px; line-height:2; color:#9a9a9a; letter-spacing:.04em; position:relative; z-index:2; background:#050505}
+  .req b{color:#fff}
+
+  /* карточки */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px}
+  .card{background:var(--brand); clip-path:var(--px-clip); padding:2px}
+  .card>div{background:#070b0b; clip-path:var(--px-clip); padding:26px 22px; height:100%; text-align:center}
+  .card .big{font-family:'Press Start 2P',monospace; word-spacing:-.45em; font-size:13px; color:var(--brand); line-height:1.6; margin-bottom:12px; text-transform:uppercase}
+  .card p{font-size:12.5px; line-height:1.7; color:#9a9a9a; letter-spacing:.04em; text-transform:uppercase}
+  .card.hl>div{background:var(--brand)}
+  .card.hl .big{color:#000}
+  .card.hl p{color:#063A3D; font-weight:600}
+
+  /* направления */
+  .dir3{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px}
+  .dir3 .d{border:1px solid var(--line); padding:30px 26px}
+  .dir3 h4{font-family:'Press Start 2P',monospace; word-spacing:-.45em; font-size:13px; color:#fff; margin-bottom:16px; text-transform:uppercase; line-height:1.6}
+  .dir3 p{font-size:14px; line-height:1.7; color:#bdbdbd}
+  .dir3 p b{color:var(--brand)}
+
+  /* бонус */
+  .bonus{background:var(--brand); clip-path:var(--px-clip); padding:2px; max-width:1020px; margin:0 auto}
+  .bonus>div{background:var(--brand); clip-path:var(--px-clip); padding:40px 36px; color:#000}
+  .bonus h3{font-family:'Press Start 2P',monospace; word-spacing:-.45em; font-size:clamp(14px,1.8vw,22px); margin-bottom:18px; text-transform:uppercase; line-height:1.5}
+  .bonus p{font-size:15px; line-height:1.75; color:#063A3D; font-weight:600; max-width:80ch}
+
+  /* доверяют */
+  .trust{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px 6vw}
+  .trust h3{font-size:12px; letter-spacing:.22em; color:#777; text-transform:uppercase; margin-bottom:18px; font-weight:600}
+  .trust li{list-style:none; font-weight:500; font-size:15px; line-height:2.0; color:#eaeaea}
+
+  /* работы */
+  .works-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px}
+  .wcard{position:relative; cursor:pointer; clip-path:var(--px-clip); overflow:hidden}
+  .wcard img{width:100%; aspect-ratio:16/10; object-fit:cover; display:block; filter:brightness(.8); transition:transform .3s ease, filter .3s}
+  .wcard:hover img{transform:scale(1.04); filter:brightness(1)}
+  .wcard .cap{position:absolute; left:0; right:0; bottom:0; padding:40px 18px 14px; background:linear-gradient(transparent, rgba(0,0,0,.92))}
+  .wcard .cap b{display:block; font-size:14.5px; color:#fff; margin-bottom:4px}
+  .wcard .cap span{font-size:11px; letter-spacing:.18em; color:var(--brand); text-transform:uppercase; font-weight:700}
+  #vModal{position:fixed; inset:0; z-index:70; background:rgba(0,0,0,.94); display:none; align-items:center; justify-content:center; padding:4vh 4vw}
+  #vModal.open{display:flex}
+  #vModal video{max-width:min(1100px,94vw); width:100%; max-height:86vh; outline:2px solid var(--brand)}
+  #vModal .close{position:absolute; top:22px; right:30px; font-size:36px; color:#fff; cursor:pointer; line-height:1}
+  #vModal .close:hover{color:var(--brand)}
+
+  footer{border-top:1px solid var(--line); padding:8vh 6vw; text-align:center; font-size:13px; color:#8a8a8a; line-height:2}
+  footer a{color:var(--brand); text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html"><img src="assets/logo.png" alt="METAFRAME"></a>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<div class="hero">
+  <p class="label">Презентация компании</p>
+  <h1 class="px">ТОО «V TRENDE» <span class="accent">×</span> METAFRAME</h1>
+  <p class="sub"><b>METAFRAME</b> — креативная студия ТОО «V TRENDE»: AI-кинопроизводство, IT-разработка и обучение. Мы режиссируем ИИ-контент для компаний и государственных структур Казахстана — от брендов до министерств.</p>
+  <div class="facts">
+    <span class="fact">11 лет в кино и рекламе</span>
+    <span class="fact">15+ лет в IT</span>
+    <span class="fact">Астана</span>
+  </div>
+</div>
+
+<div class="req">
+  <p class="label" style="margin-bottom:12px">Юридическое лицо</p>
+  <p><b>ТОО «V TRENDE»</b> · Астана, ул. Иманова, дом 26 · БИН: 190240032399 · КБе: 17</p>
+  <p>АО «Kaspi Bank» · БИК: CASPKZKA · Счёт: KZ68722S000001991871</p>
+</div>
+
+<!-- ===================== О КОМПАНИИ ===================== -->
+<section>
+  <div class="wrap">
+    <p class="label" style="margin-bottom:24px">О компании</p>
+    <h2 class="px">IT, AI и кино — <span class="accent">один подрядчик</span> на весь цикл</h2>
+    <p class="body">За плечами команды — 11 лет в кинопроизводстве и рекламе и более 15 лет в разработке ИТ-продуктов. Мы режиссируем AI-контент мирового уровня и строим цифровые продукты под реальные задачи: от идеи до работающей технологии с визуальной упаковкой.</p>
+    <p class="body">Основатель студии <b>Дархан Телманов</b> — ex. Generative Director компании <b>Higgsfield</b> (один из самых быстрорастущих ИИ-стартапов мира) и победитель <b>Higgsfield World Championship 2025</b> среди 5000+ участников.</p>
+  </div>
+</section>
+
+<!-- ===================== РЕГАЛИИ ===================== -->
+<section>
+  <div class="wrap">
+    <p class="label" style="margin-bottom:24px">Регалии</p>
+    <h2 class="px">Почему нам можно доверить масштаб</h2>
+    <div class="cards">
+      <div class="card"><div><div class="big">Winner</div><p>Higgsfield World Championship 2025 · среди 5000+ участников</p></div></div>
+      <div class="card"><div><div class="big">ex. Generative Director</div><p>Higgsfield — глобальная AI-видео платформа</p></div></div>
+      <div class="card"><div><div class="big">Top-1 AI Creator</div><p>Астана · Case Championship</p></div></div>
+      <div class="card"><div><div class="big">Гос-опыт</div><p>Проекты для МВД, МЧС, министерств и нацкомпаний</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== НАПРАВЛЕНИЯ ===================== -->
+<section>
+  <div class="wrap">
+    <p class="label" style="margin-bottom:24px">Экспертиза</p>
+    <h2 class="px">Три направления</h2>
+    <div class="dir3">
+      <div class="d"><h4>AI — Video</h4><p>Рекламные ролики, имиджевые фильмы и брендовые анимации, созданные генеративным пайплайном — в разы быстрее и дешевле классического продакшна.</p></div>
+      <div class="d"><h4>IT &amp; Web</h4><p>Разработка цифровых продуктов: сайты, сервисы, интеграции. 15+ лет инженерной экспертизы.</p></div>
+      <div class="d"><h4>AI Academy</h4><p>Обучаем промпт-инжинирингу и генеративному продакшну. <b>Наши выпускники попадают в команду Higgsfield</b> — это уровень школы.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== БОНУС ===================== -->
+<section>
+  <div class="bonus"><div>
+    <h3>Бонус для вашей организации</h3>
+    <p>При сотрудничестве проводим корпоративный мастер-класс по ИИ-генерациям для ваших сотрудников: промпт-инжиниринг, создание роликов и постеров своими руками, правильная интеграция ИИ в рабочие процессы. Команда уходит с практическими навыками, а не с конспектом.</p>
+  </div></div>
+</section>
+
+<!-- ===================== ДОВЕРЯЮТ ===================== -->
+<section>
+  <div class="wrap">
+    <p class="label" style="margin-bottom:24px">Нам доверяют</p>
+    <h2 class="px">Бренды, личности, государство</h2>
+    <div class="trust">
+      <ul>
+        <h3>Бренды</h3>
+        <li>Kaspi Bank</li><li>Hyundai</li><li>Porsche</li><li>Mercedes-Benz</li><li>BI Group</li><li>Galmart</li><li>Salem Ent.</li><li>MyCar · Geely</li>
+      </ul>
+      <ul>
+        <h3>Личности</h3>
+        <li>Нурлан Сабуров</li><li>Данияр Ашимов</li><li>Айдын Рахимбаев</li><li>Truwer · Niman</li><li>Lucaveros</li><li>Virtus Pro</li>
+      </ul>
+      <ul>
+        <h3>Квази / Гос</h3>
+        <li>МВД · МЧС</li><li>ХК «Барыс» · КФФ</li><li>Астана ФК</li><li>Мин. культуры</li><li>Все казахстанские телеканалы</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== РАБОТЫ ===================== -->
+<section>
+  <div class="wrap" style="max-width:1120px">
+    <p class="label" style="margin-bottom:24px">Кейсы</p>
+    <h2 class="px">Наши работы</h2>
+    <div class="works-grid">
+      <div class="wcard" data-v="assets/works/kazakhstan.mp4"><img src="assets/works/kazakhstan.jpg" alt=""><div class="cap"><b>Qazaqstan Brand Logo</b><span>Brand Animation</span></div></div>
+      <div class="wcard" data-v="assets/works/uww.mp4"><img src="assets/works/uww.jpg" alt=""><div class="cap"><b>UWW Чемпионат мира</b><span>Астана 2026 · Official Promo</span></div></div>
+      <div class="wcard" data-v="assets/works/airport.mp4"><img src="assets/works/airport.jpg" alt=""><div class="cap"><b>Международный аэропорт</b><span>Презентация для ОДКБ</span></div></div>
+      <div class="wcard" data-v="assets/works/mvd.mp4"><img src="assets/works/mvd.jpg" alt=""><div class="cap"><b>МВД Казахстана</b><span>AI Film</span></div></div>
+      <div class="wcard" data-v="assets/works/adsl.mp4"><img src="assets/works/adsl.jpg" alt=""><div class="cap"><b>Nazarbayev University ADSL</b><span>AI Commercial</span></div></div>
+      <div class="wcard" data-v="assets/works/bigsom.mp4"><img src="assets/works/bigsom.jpg" alt=""><div class="cap"><b>V $ X V Prince &amp; Big Som</b><span>Music Video</span></div></div>
+      <div class="wcard" data-v="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/AIGA.mov"><img src="assets/works/aiga.jpg" alt=""><div class="cap"><b>AIGA</b><span>Tournament Opening</span></div></div>
+      <div class="wcard" data-v="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/artesian.mp4"><img src="assets/works/artesian.jpg" alt=""><div class="cap"><b>Artesian Krystal Water</b><span>AI Commercial</span></div></div>
+      <div class="wcard" data-v="https://pub-61c639e926f84516b5750dfb1d7358e5.r2.dev/caviarhouse.mp4"><img src="assets/works/caviarhouse.jpg" alt=""><div class="cap"><b>Caviar House</b><span>AI Commercial</span></div></div>
+    </div>
+    <p class="body" style="margin-top:4vh">Полное портфолио — <a href="ai-video.html" style="color:var(--brand)">metaframe.ltd/ai-video</a></p>
+  </div>
+</section>
+
+<div id="vModal">
+  <span class="close" id="vClose">&times;</span>
+  <video id="vPlayer" controls playsinline></video>
+</div>
+
+<footer>
+  <p class="px" style="color:var(--brand); font-size:14px; margin-bottom:14px">METAFRAME · V TRENDE</p>
+  <p>г. Астана, ул. Иманова, 26 · <a href="mailto:info@caster.kz">info@caster.kz</a> · <a href="https://metaframe.ltd">metaframe.ltd</a></p>
+  <p>ТОО «V TRENDE» · БИН 190240032399</p>
+</footer>
+
+<script>
+  const vm = document.getElementById('vModal'), vp = document.getElementById('vPlayer');
+  document.querySelectorAll('.wcard').forEach(c=>c.addEventListener('click', ()=>{
+    vp.src = c.dataset.v; vm.classList.add('open'); vp.play();
+  }));
+  function vClose(){ vm.classList.remove('open'); vp.pause(); vp.src=''; }
+  document.getElementById('vClose').addEventListener('click', vClose);
+  vm.addEventListener('click', e=>{ if(e.target===vm) vClose(); });
+  addEventListener('keydown', e=>{ if(e.key==='Escape') vClose(); });
+</script>
+</body>
+</html>
