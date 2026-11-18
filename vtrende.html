@@ -19,10 +19,10 @@
   header{position:fixed; inset:0 0 auto 0; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:20px 34px; mix-blend-mode:screen}
   header img{height:40px; display:block}
 
-  .hero{min-height:92svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:14vh 6vw 8vh; position:relative; overflow:hidden;
-    background:
-      linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.86)),
-      url('assets/directions-bg.jpg') center / cover no-repeat #000;}
+  .hero{min-height:92svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:14vh 6vw 8vh; position:relative; overflow:hidden; background:#000}
+  .hero .bgvid{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0}
+  .hero::after{content:''; position:absolute; inset:0; background:rgba(0,0,0,.76); z-index:1}
+  .hero > *{position:relative; z-index:2}
   .hero .label{margin-bottom:26px}
   .hero h1{font-size:clamp(26px,4.6vw,62px); line-height:1.25}
   .hero h1 .accent{color:var(--brand)}
@@ -84,6 +84,7 @@
   #vModal .close{position:absolute; top:22px; right:30px; font-size:36px; color:#fff; cursor:pointer; line-height:1}
   #vModal .close:hover{color:var(--brand)}
 
+  @media(max-width:860px){ .reggrid{grid-template-columns:1fr !important} }
   footer{border-top:1px solid var(--line); padding:8vh 6vw; text-align:center; font-size:13px; color:#8a8a8a; line-height:2}
   footer a{color:var(--brand); text-decoration:none}
 </style>
@@ -96,6 +97,7 @@
 
 <!-- ===================== HERO ===================== -->
 <div class="hero">
+  <video class="bgvid" src="assets/aivideo-hero.mp4" autoplay muted loop playsinline></video>
   <p class="label">Презентация компании</p>
   <h1 class="px">ТОО «V TRENDE» <span class="accent">×</span> METAFRAME</h1>
   <p class="sub"><b>METAFRAME</b> — креативная студия ТОО «V TRENDE»: AI-кинопроизводство, IT-разработка и обучение. Мы режиссируем ИИ-контент для компаний и государственных структур Казахстана — от брендов до министерств.</p>
@@ -113,7 +115,7 @@
 </div>
 
 <!-- ===================== О КОМПАНИИ ===================== -->
-<section>
+<section style="position:relative; overflow:hidden; background:linear-gradient(rgba(0,0,0,.82), rgba(0,0,0,.9)), url('assets/directions-bg.jpg') center 30% / cover no-repeat #000">
   <div class="wrap">
     <p class="label" style="margin-bottom:24px">О компании</p>
     <h2 class="px">IT, AI и кино — <span class="accent">один подрядчик</span> на весь цикл</h2>
@@ -124,27 +126,34 @@
 
 <!-- ===================== РЕГАЛИИ ===================== -->
 <section>
-  <div class="wrap">
+  <div class="wrap" style="max-width:1120px">
     <p class="label" style="margin-bottom:24px">Регалии</p>
     <h2 class="px">Почему нам можно доверить масштаб</h2>
-    <div class="cards">
-      <div class="card"><div><div class="big">Winner</div><p>Higgsfield World Championship 2025 · среди 5000+ участников</p></div></div>
-      <div class="card"><div><div class="big">ex. Generative Director</div><p>Higgsfield — глобальная AI-видео платформа</p></div></div>
-      <div class="card"><div><div class="big">Top-1 AI Creator</div><p>Астана · Case Championship</p></div></div>
-      <div class="card"><div><div class="big">Гос-опыт</div><p>Проекты для МВД, МЧС, министерств и нацкомпаний</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== НАПРАВЛЕНИЯ ===================== -->
-<section>
-  <div class="wrap">
-    <p class="label" style="margin-bottom:24px">Экспертиза</p>
-    <h2 class="px">Три направления</h2>
-    <div class="dir3">
-      <div class="d"><h4>AI — Video</h4><p>Рекламные ролики, имиджевые фильмы и брендовые анимации, созданные генеративным пайплайном — в разы быстрее и дешевле классического продакшна.</p></div>
-      <div class="d"><h4>IT &amp; Web</h4><p>Разработка цифровых продуктов: сайты, сервисы, интеграции. 15+ лет инженерной экспертизы.</p></div>
-      <div class="d"><h4>AI Academy</h4><p>Обучаем промпт-инжинирингу и генеративному продакшну. <b>Наши выпускники попадают в команду Higgsfield</b> — это уровень школы.</p></div>
+    <div style="display:grid; grid-template-columns:minmax(280px,1fr) minmax(300px,1.4fr); gap:26px; align-items:stretch" class="reggrid">
+      <div style="clip-path:var(--px-clip); position:relative; min-height:440px; background:url('assets/founder-bg.jpg') 30% 18% / cover no-repeat">
+        <div style="position:absolute; inset:auto 0 0 0; padding:60px 22px 20px; background:linear-gradient(transparent, rgba(0,0,0,.94))">
+          <b style="font-family:'Press Start 2P',monospace; word-spacing:-.45em; font-size:15px; color:#fff; text-transform:uppercase">Дархан Телманов</b>
+          <p style="font-size:12px; letter-spacing:.14em; color:#BFEE0A; text-transform:uppercase; margin-top:10px; font-weight:700">ex. Generative Director — Higgsfield</p>
+          <p style="font-size:12px; letter-spacing:.1em; color:#c9c9c9; text-transform:uppercase; margin-top:6px">Основатель METAFRAME · Top-1 AI Creator в Астане</p>
+        </div>
+      </div>
+      <div style="display:grid; gap:18px">
+        <div class="card hl"><div style="display:flex; align-items:center; gap:22px; text-align:left">
+          <img src="assets/award.png" alt="Winner Higgsfield World Championship 2025" style="height:110px; flex:0 0 auto">
+          <div>
+            <div class="big" style="color:#000; text-align:left">Winner — Higgsfield World Championship 2025</div>
+            <p style="color:#063A3D; text-align:left; font-weight:700">Первое место среди 5000+ AI-креаторов мира</p>
+          </div>
+        </div></div>
+        <div class="cards" style="grid-template-columns:1fr 1fr">
+          <div class="card"><div><div class="big">11 лет</div><p>в кино и рекламе · 15+ лет в IT-разработке</p></div></div>
+          <div class="card"><div><div class="big">Гос-опыт</div><p>МВД · МЧС · министерства · нацкомпании</p></div></div>
+        </div>
+        <div class="wcard" id="certOpen" style="aspect-ratio:16/7">
+          <img src="assets/award-photo.jpg" alt="Сертификат Higgsfield World Championship 2025" style="aspect-ratio:16/7">
+          <div class="cap"><b>Сертификат чемпионата</b><span>Higgsfield World Championship 2025 · нажмите, чтобы открыть</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -153,7 +162,7 @@
 <section>
   <div class="bonus"><div>
     <h3>Бонус для вашей организации</h3>
-    <p>При сотрудничестве проводим корпоративный мастер-класс по ИИ-генерациям для ваших сотрудников: промпт-инжиниринг, создание роликов и постеров своими руками, правильная интеграция ИИ в рабочие процессы. Команда уходит с практическими навыками, а не с конспектом.</p>
+    <p>При сотрудничестве проводим корпоративный мастер-класс по ИИ-генерациям для ваших сотрудников: промпт-инжиниринг, создание роликов и постеров своими руками, правильная интеграция ИИ в рабочие процессы. Команда уходит с практическими навыками, а не с конспектом. Уровень нашей школы подтверждает главное: выпускники академии METAFRAME попадают в команду Higgsfield.</p>
   </div></div>
 </section>
 
@@ -199,6 +208,11 @@
   </div>
 </section>
 
+<div id="iModal" style="position:fixed; inset:0; z-index:71; background:rgba(0,0,0,.94); display:none; align-items:center; justify-content:center; padding:4vh 4vw">
+  <span id="iClose" style="position:absolute; top:22px; right:30px; font-size:36px; color:#fff; cursor:pointer; line-height:1">&times;</span>
+  <img src="assets/award-photo.jpg" alt="Сертификат" style="max-width:min(1000px,92vw); max-height:86vh; outline:2px solid var(--brand)">
+</div>
+
 <div id="vModal">
   <span class="close" id="vClose">&times;</span>
   <video id="vPlayer" controls playsinline></video>
@@ -212,13 +226,17 @@
 
 <script>
   const vm = document.getElementById('vModal'), vp = document.getElementById('vPlayer');
-  document.querySelectorAll('.wcard').forEach(c=>c.addEventListener('click', ()=>{
+  document.querySelectorAll('.wcard[data-v]').forEach(c=>c.addEventListener('click', ()=>{
     vp.src = c.dataset.v; vm.classList.add('open'); vp.play();
   }));
   function vClose(){ vm.classList.remove('open'); vp.pause(); vp.src=''; }
   document.getElementById('vClose').addEventListener('click', vClose);
   vm.addEventListener('click', e=>{ if(e.target===vm) vClose(); });
-  addEventListener('keydown', e=>{ if(e.key==='Escape') vClose(); });
+  addEventListener('keydown', e=>{ if(e.key==='Escape'){ vClose(); iM.style.display='none'; } });
+  const iM = document.getElementById('iModal');
+  document.getElementById('certOpen').addEventListener('click', e=>{ e.stopPropagation(); iM.style.display='flex'; });
+  document.getElementById('iClose').addEventListener('click', ()=> iM.style.display='none');
+  iM.addEventListener('click', ev=>{ if(ev.target===iM) iM.style.display='none'; });
 </script>
 </body>
 </html>
