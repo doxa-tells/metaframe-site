@@ -22,6 +22,9 @@
 
 var P = PropertiesService.getScriptProperties();
 var WZ_BASE = 'https://wazzapo.kz/api/v2/external';
+// Telegram: берётся из Свойств скрипта, пока не заданы — используются текущие значения
+var TG_TOKEN = P.getProperty('TG_TOKEN') || '8673079878:AAHpWbR11bdoPqGwr0R-aj39sThTQln3jIM';
+var TG_CHAT  = P.getProperty('TG_CHAT')  || '-5380084978';
 
 /* ===================== ПРИЁМ ЗАЯВКИ ===================== */
 function doPost(e) {
@@ -42,8 +45,8 @@ function sendTg(p) {
     var msg = (pay ? '🟢 ЛИД — ГОТОВ ПЛАТИТЬ 9900' : '🔴 Лид — НЕ готов платить') + '\n\n' +
       'Имя: ' + (p.name||'—') + '\nТелефон: ' + (p.phone||'—') + '\nЗанятие: ' + (p.work||'—') +
       '\nОпыт: ' + (p.exp||'—') + '\nЦель: ' + (p.goal||'—');
-    UrlFetchApp.fetch('https://api.telegram.org/bot' + P.getProperty('TG_TOKEN') + '/sendMessage',
-      {method:'post', payload:{chat_id: P.getProperty('TG_CHAT'), text: msg}, muteHttpExceptions:true});
+    UrlFetchApp.fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage',
+      {method:'post', payload:{chat_id: TG_CHAT, text: msg}, muteHttpExceptions:true});
   } catch(err) {}
 }
 
